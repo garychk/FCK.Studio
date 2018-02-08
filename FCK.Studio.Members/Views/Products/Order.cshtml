@@ -1,0 +1,116 @@
+﻿@model FCK.Studio.Members.Models.OrderPageDto
+@{
+    ViewBag.Title = "订单确认";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+@section scripts{
+    <script>
+        $(function () {
+            $("#GoPay").click(function () {
+                var Member_ID = parseInt($("#Member_ID").val());
+                var mobile = $("#Member_Telphone").val();
+                if (Member_ID > 0) {
+                    if (mobile == "" || !checkMobile(mobile)) {
+                        alertE("请输入正确的手机号！");
+                    }
+                    else {
+                        $("#payway-select").slideDown();
+                        $("#app-detail-bottom").slideUp();
+                        $(".app-cover").show();
+                    }
+                } else {
+                    confirmE("您尚未登录，现在登录吗？", function () {
+                        OpenWin("用户登录", "/Home/QuickLogin/", "")
+                    });
+                }
+                return false;
+            });
+
+            $(".app-cover").click(function () {
+                $("#payway-select").slideUp();
+                $("#app-detail-bottom").slideDown();
+                $(".app-cover").hide();
+            });
+
+            $("#PayByLocal").click(function () {
+                var form = $("#FormAddOrder");
+                var options = {
+                    url: '/Products/PayByLocal',
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.code == 100) {
+                            window.location = "/Products/PayResult/" + data.message;
+                        }
+                        else
+                            alertE(data.message);
+                    }
+                };
+                $(form).ajaxSubmit(options);
+            });
+        });
+    </script>
+
+}
+<form action="/Products/AddOrder" method="post" name="FormAddOrder" id="FormAddOrder">
+    <div style="margin-bottom:60px">
+        <table class="table table-condensed">
+            <tr>
+                <th></th>
+                <th>商品</th>
+                <th>单价</th>
+                <th style="width:40px">数量</th>
+            </tr>
+            @{
+                decimal TotalAmount = 0;
+                foreach (var item in Model.Products)
+                {
+                    <tr>
+                        <td><img src="@(FCK.Config.ImgServer)@item.Product_Pic" class="img-responsive" width="100"></td>
+                        <td>@item.Product_Name</td>
+                        <td class="text-danger"><i class="iconfont icon-money"></i>@item.Product_Price.ToString("0.00")</td>
+                        <td>@item.Product_Number</td>
+                    </tr>
+                    TotalAmount += item.Product_Price * item.Product_Number;
+                }
+            }
+        </table>
+        <p>您的手机号：<input type="number" class="form-control" name="Member_Telphone" id="Member_Telphone" value="@Model.Member.Member_Mobile"></p>
+        <p>订单留言：<input type="text" class="form-control" name="Order_Memo" value=""></p>
+        <p class="text-right">总金额：<span class="text-danger"><i class="iconfont icon-money"></i>@TotalAmount.ToString("0.00")</span></p>
+        <h4>商家信息</h4>
+        @Html.Action("_PartialShopInfo", "Products", new { registerid = Model.Register_ID })
+    </div>
+    <div id="app-detail-bottom" class="navbar-fixed-bottom app-detail-bottom">
+        <div>
+            <input type="hidden" name="Member_ID" id="Member_ID" value="@Model.Member.Member_ID">
+            <input type="hidden" name="Register_ID" value="@Model.Register_ID">
+            <input type="hidden" name="Order_Amount" value="@TotalAmount">
+            <input type="hidden" name="Order_Status" value="0">
+            <input type="hidden" name="OrderDetail" value="@Model.OrderDetail">
+            <input type="hidden" name="Order_Payway" value="local">
+            <input type="hidden" name="Share_Code" value="@Model.Share_Code">
+            <button type="submit" class="btn btn-danger btn-lg btn-block" id="GoPay">立即支付</button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</form>
+<div id="payway-select" class="navbar-fixed-bottom app-payway" style="display:none">
+    <div class="list-group" style="margin:0px">
+        @{
+            if (TotalAmount > Model.Member.Member_Amount)
+            {
+                <a class="list-group-item app-ccc">当前余额 @Model.Member.Member_Amount.ToString("0.00") 不足</a>
+            }
+            else
+            {
+                <a href="#" class="list-group-item" id="PayByLocal"><i class="iconfont icon-jinbi" style="color: #ffd800"></i>&nbsp;余额支付，当前余额 @Model.Member.Member_Amount.ToString("0.00")</a>
+            }
+        }
+
+        <a href="#" class="list-group-item"><i class="iconfont icon-alipay" style="color:#009FE8"></i>&nbsp;支付宝支付</a>
+        <a href="#" class="list-group-item"><i class="iconfont icon-wepay" style="color:#00C901"></i>&nbsp;微信支付</a>
+        <a href="#" class="list-group-item"><i class="iconfont icon-wangyin" style="color:#ff6a00"></i>&nbsp;网银支付</a>
+    </div>
+</div>
+<div class="app-cover" style="display:none"></div>

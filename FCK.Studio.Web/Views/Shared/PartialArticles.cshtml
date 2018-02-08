@@ -1,0 +1,53 @@
+﻿@using FCK.Common
+@using FCK.Studio.Dto
+@model PageDatas<ArticleDto>
+@if (Model.total > 0)
+{
+    <div class="fck-article-list">
+        <div class="table-responsive">
+            <table class="table">
+                @foreach (var item in Model.datas)
+                {
+                    <tr>
+                        <td>
+                            <div class=""><br /><img src="/Content/img/blank.gif" data-original="@(Utility.ImgServer)@(item.Article_Pic)" style="width: 64px" class="lazy"></div>
+                        </td>
+                        <td>
+                            <h2><a href="/Article/Detail/@item.Article_ID">@item.Article_Title</a></h2>
+                            <p class="color9">
+                                <small>
+                                    <span class="glyphicon glyphicon-tag"></span>@item.Article_Tag
+                                    <span class="glyphicon glyphicon-time"></span>@item.Article_UpdateTime
+                                    <span class="glyphicon glyphicon-heart"></span>@item.Article_Hits
+                                </small>
+                            </p>
+                            <p class="color6">@item.Article_Brief</p>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <p><span class="glyphicon glyphicon-info-sign colorf60"></span>&nbsp;没有找到相关信息！</p>
+}
+@if (Model.pages > 1)
+{
+    <nav class="text-center">
+        <ul class="pagination" id="pagination">
+            <li>
+                <a href="1" aria-label="Previous">&laquo;</a>
+            </li>
+            @for (int i = 0; i < Model.pages; i++)
+            {
+                <li><a href="@(i + 1)">@(i + 1)</a></li>
+            }
+            <li>
+                <a href="@Model.pages" aria-label="Next">&raquo;</a>
+            </li>
+        </ul>
+    </nav>
+}
+

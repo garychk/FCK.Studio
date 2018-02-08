@@ -1,0 +1,47 @@
+﻿@model FCK.Studio.Core.ArticleDto
+@{
+    ViewBag.Title = Model.Article_Title + "—时优谷无锡网页设计第一品牌|自适应网页设计|自适应网站开发|HTML5网页制作|Bootstrap网站|网站优化";
+    ViewBag.description = "时优谷（GOOSTUDIO）是一家专注于HTML5网站建设，微信开发，APP定制开发，以及SEO优化和网站推广的创新设计工作室。工作室成立于 2014年初，在网页设计和互联网应用开发领域有着独特理解。";
+    ViewBag.keywords = "自适应网页设计|自适应网站开发|HTML5网页制作|Bootstrap网站|网站优化|无锡微信开发|无锡APP开发";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+<aside class="fh5co-page-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="fh5co-page-heading-lead">@Model.Article_Title
+                    <span class="fh5co-border"></span>
+                </h1>
+
+            </div>
+        </div>
+    </div>
+</aside>
+<div class="container text-center">
+    <span class="icon-clock">@Model.Article_UpdateTime</span>
+    <span class="icon-rss">@Model.Article_CateName</span>
+    <span class="icon-star">@Model.Article_Hits</span>
+    <hr />
+</div>
+<div class="container" id="fh5co-products">
+    <div class="row text-left">
+        <div class="col-md-12">
+            @Html.Raw(Model.Article_Contents)
+            <hr />
+            <div class="pull-right">
+            <!-- JiaThis Button BEGIN -->
+            <div class="jiathis_style_24x24">
+                <a class="jiathis_button_qzone"></a>
+                <a class="jiathis_button_tsina"></a>
+                <a class="jiathis_button_tqq"></a>
+                <a class="jiathis_button_weixin"></a>
+                <a class="jiathis_button_renren"></a>
+                <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+            </div>
+            <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+            <!-- JiaThis Button END -->
+            </div>
+        </div>
+        <div class="fh5co-spacer fh5co-spacer-md"></div>
+    </div>
+</div>

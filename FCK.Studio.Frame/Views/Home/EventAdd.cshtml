@@ -1,0 +1,70 @@
+﻿@using FCK.Studio.Frame.Core
+@{
+    ViewBag.Title = "云助手";
+    Layout = "~/Views/Shared/_LayoutWin.cshtml";
+}
+<script>
+    $(function () {
+        var events = new Events()
+        $("#SubmitOk").click(function () {
+            events.CreateOrUpdate("FormAddEvent");
+            if (events.datas.code == 100) {
+                $(".jconfirm-box-container .closeIcon").click();
+            } else {
+                alertE(events.datas.message);
+            }
+        });
+    });
+</script>
+<hr />
+<form class="form-horizontal" role="form" id="FormAddEvent">
+    <div class="form-group">
+        <label for="Event_StartTime" class="col-xs-4 col-sm-2 control-label">开始日期</label>
+        <div class="col-xs-8 col-sm-10">
+            <input type="date" class="form-control" id="Event_StartTime" name="Event_StartTime" value="@(Request.QueryString["date"])">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Event_EndTime" class="col-xs-4 col-sm-2 control-label">结束日期</label>
+        <div class="col-xs-8 col-sm-10">
+            <input type="date" class="form-control" id="Event_EndTime" name="Event_EndTime">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Event_Code" class="col-xs-4 col-sm-2 control-label">代号</label>
+        <div class="col-xs-8 col-sm-10">
+            <input type="text" class="form-control" id="Event_Code" name="Event_Code">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Event_Name" class="col-xs-4 col-sm-2 control-label">名称</label>
+        <div class="col-xs-8 col-sm-10">
+            <input type="text" class="form-control" id="Event_Name" name="Event_Name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Event_Grade" class="col-xs-4 col-sm-2 control-label">等级</label>
+        <div class="col-xs-8 col-sm-10">
+            <select class="form-control" id="Event_Grade" name="Event_Grade">
+                <option value="1">高</option>
+                <option value="2">中</option>
+                <option value="3">低</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Event_Content" class="col-xs-4 col-sm-2 control-label">事务内容</label>
+        <div class="col-xs-8 col-sm-10">
+            <textarea class="form-control" id="Event_Content" name="Event_Content"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="hidden" id="Event_ID" name="Event_ID" value="0" />
+            <input type="hidden" id="Event_Leader" name="Event_Leader" value="@(CookieHelper.CookieVal("UserId"))" />
+            <input type="hidden" id="Event_TakeTime" name="Event_TakeTime" value="@(DateTime.Now)" />
+            <input type="hidden" id="Event_OverTime" name="Event_OverTime" value="@(DateTime.Now)" />
+            <button type="button" class="btn btn-success" id="SubmitOk">提交</button>
+        </div>
+    </div>
+</form>

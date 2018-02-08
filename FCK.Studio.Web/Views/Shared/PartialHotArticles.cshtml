@@ -1,0 +1,14 @@
+﻿@using FCK.Studio.Dto
+@model PageDatas<ArticleDto>
+<ul class="list-unstyled">
+    @foreach (var item in Model.datas)
+    {
+        <li>
+            <p><a href="@ViewData["listurl"]@item.Article_ID">@item.Article_Title</a></p>
+            <p class="color9">
+                <small><span class="glyphicon glyphicon-tags"></span>&nbsp;<span>@item.Article_Tag</span>
+                <span class="glyphicon glyphicon-time"></span>&nbsp;<span>@item.Article_UpdateTime.ToShortDateString()</span></small>
+            </p>
+        </li>  
+    }
+</ul>

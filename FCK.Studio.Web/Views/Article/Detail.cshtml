@@ -1,0 +1,102 @@
+﻿@using FCK.Common
+@model FCK.Studio.Dto.ArticleDto
+@{
+    ViewBag.Title = Model.Article_Title;
+    ViewBag.Keywords = Model.Article_Keywords;
+    ViewBag.Description = Model.Article_Description;
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@section scripts{
+    <script src="~/Content/js/fck-article-detail.js"></script>
+}
+<div class="fck-banner">
+    <div class="container">
+        <h1>Innovation distinguishes between a leader and a follower.</h1>
+        <p>We're here to put a dent in the universe. Otherwise why else even be here?</p>
+    </div>
+</div>
+
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="/Home/">首页</a></li>
+        <li><a href="/Article/">博文</a></li>
+        <li class="active">@Model.Article_Title</li>
+    </ol>
+    <div class="row  fck-m-top">
+        <div class="col-md-9">
+            <div class="fck-w">
+                <div class="fck-blog-detail">
+                    <h2>@Model.Article_Title</h2>
+                    <p class="color9">
+                        <span class="glyphicon glyphicon-tag"></span>@Model.Article_Tag
+                        <span class="glyphicon glyphicon-time"></span>@Model.Article_UpdateTime
+                        <span class="glyphicon glyphicon-eye-open"></span>@Model.Article_Hits
+                    </p>
+		    <blockquote>@Model.Article_Brief</blockquote>
+                    <div class="entry-content">@Html.Raw(Model.Article_Contents)</div>
+
+                </div>
+            </div>
+            <div class="fck-w">
+                <div class="fck-title">
+                    <div class="fck-rgt"><a class="btn btn-info btn-sm" href="/Resources/?tag=@Model.Article_Tag">更多</a></div>
+                    <span>相关资源</span>
+                </div>
+                <div id="ResourcesList">
+                    @Html.Action("_PartialResources", "Resources", new { pageSize = 3, tag = Model.Article_Tag })
+                </div>
+            </div>            
+            <div class="fck-w">
+                <div class="fck-title"><span>最新评论</span></div>
+                @Html.Action("_PartialComments", new { articleid = Model.Article_ID })
+                <form class="form-group" id="FormComment" name="FormComment">
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="请至少输入12个字符的评语" id="Comment_Contents" name="Comment_Contents"></textarea>
+                    </div>
+                    <div class="text-right">
+                        <input type="hidden" name="Article_ID" value="@Model.Article_ID">
+                        <input type="hidden" name="Article_Title" value="@Model.Article_Title">
+                        <input type="hidden" name="Member_ID" id="Member_ID" value="@CookieHelper.CookieVal("UserId")">
+                        <input type="hidden" name="Member_NickName" value="@CookieHelper.CookieVal("UserName")">
+                        <input type="hidden" name="Member_Header" value="@ViewData["UserHeader"]">
+
+                        <ul class="list-inline">
+                            <li>
+                                <input type="text" id="vcode" name="vcode" class="form-control" placeholder="请输入图形验证码" required /></li>
+                            <li>
+                                <img src="/Base/VeriCode" onclick="javascript:this.src='/Base/VeriCode?tm='+Math.random()" id="ChgCodeImg" /></li>
+                            <li>
+                                <button type="submit" class="btn btn-success">确认发表</button></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <!--@Html.Action("Advertise", "Article", new { width = 870, height = 130, advtag = "Adv_ArticleDetail" })-->
+        </div>
+        <div class="col-md-3">
+            <div id="sideCate">
+                <div class="panel panel-default">
+                    <div class="panel-heading">博文作者</div>
+                    <div class="panel-body">
+                        @Html.Action("_PartialMemberInfo", "Article", new { memberid = Model.Article_MemberID })
+                    </div>
+                </div>
+                <div class="fck-w">
+                    <div class="fck-title-red"><span>版块分类</span></div>
+                    @Html.Action("PartialCategory", "Article", new { catename = "博文", url = "/Article/" })
+                </div>
+                <div class="fck-w">
+                    <div class="fck-title-red"><span>猜你喜欢</span></div>
+                    @Html.Action("PartialHotArticles", "Article", new { top = 10, cateid = Model.Article_CateID, url = "/Article/Detail/" })
+                </div>
+                <div class="fck-w">
+                    <div class="fck-title-red"><span>热门标签</span></div>
+                    <div class="fck-tags">
+                        @Html.Action("PartialTags", "Article", new { catename = "博文", top = 30, url = "/Article/" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

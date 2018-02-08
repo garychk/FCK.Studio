@@ -1,0 +1,84 @@
+﻿@model FCK.Studio.Dto.MemberDto
+@{
+    ViewBag.Title = "用户中心";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+@section scripts{
+    <script>
+        $(function () {
+            $("#btn-submit").click(function () {
+                var $btn = $(this).button('loading');
+                confirmE("确定注销？", function () {
+                    var options = {
+                        url: '/Home/Logout',
+                        type: 'post',
+                        success: function (result) {
+                            if (result.code == 100)
+                                window.location = "/";
+                            else
+                                alertE(result.message);
+                            $btn.button('reset');
+                        }
+                    };
+                    $("#FormSubmit").ajaxSubmit(options);
+                }, function () {
+                    $btn.button('reset');
+                });
+                return false;
+            });
+            
+            $.post("/Member/GetAmount", { type: 'comein', keywords: '分享' }, function (result) {
+                $("#sharemoney").text(result);
+            });
+        });
+    </script>
+}
+
+<div class="panel panel-default app-usertop">
+    <div class="panel-body">
+        <div class="text-center">
+            <p><img src="@Model.Member_Header" class="img-circle" /></p>
+            <p>@(Model.Member_Name)，您好！余额：@Model.Member_Amount.ToString("0.00") 积分：@Model.Member_Points</p>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4 col-xs-4 text-center">
+                <h3><span id="sharemoney"></span></h3>
+                <p>分享收入</p>
+            </div>
+            <div class="col-md-4 col-xs-4 text-center">
+                <a href="/Member/Orders">
+                    <span><i class="iconfont icon-orders" style="font-size:40px"></i></span>
+                    <p>我的订单</p>
+                </a>
+            </div>
+            <div class="col-md-4 col-xs-4 text-center">
+                <a href="/Member/Collections">
+                    <span><i class="iconfont icon-favno" style="font-size:40px"></i></span>
+                    <p>收藏夹</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="list-group">
+    <a href="/Member/Message" class="list-group-item">
+        <i class="iconfont icon-announce"></i>&nbsp;消息中心<span class="badge app-bgred">4</span>
+    </a>
+    <a href="/Member/Shares" class="list-group-item">
+        <i class="iconfont icon-share"></i>&nbsp;我的分享
+    </a>
+    <a href="/Member/Orders" class="list-group-item">
+        <i class="iconfont icon-orders"></i>&nbsp;订单管理<span class="badge app-bgreen">2</span>
+    </a>
+    <a href="/Member/Finance" class="list-group-item">
+        <i class="iconfont icon-finance"></i>&nbsp;账单明细
+    </a>
+    <a href="/Member/Setting" class="list-group-item">
+        <i class="iconfont icon-render"></i>&nbsp;个人信息设置
+    </a>
+</div>
+<form name="FormSubmit" id="FormSubmit"><p><button type="submit" class="btn btn-danger btn-block" id="btn-submit">注销</button></p></form>

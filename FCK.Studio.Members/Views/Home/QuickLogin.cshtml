@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "QuickLogin";
+    Layout = "~/Views/Shared/_AppDetail.cshtml";
+}
+@section scripts{
+    <script>
+        $(function () {
+            $("#FormSubmit").validate({
+                rules: {
+                    UserName: {
+                        required: true
+                    },
+                    Password: {
+                        required: true
+                    }
+                },
+                messages: {
+                    UserName: {
+                        required: "请输入用户名"
+                    },
+                    Password: {
+                        required: "请输入密码"
+                    }
+                },
+                submitHandler: function (form) {
+                    var $btn = $("#btn-submit").button('loading');
+                    var options = {
+                        url: '/Home/DoLogin',
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.code == 100)
+                            {
+                                window.location.reload();
+                            }
+                            else
+                                alertE(data.message);
+                            $btn.button('reset');
+                        }
+                    };
+                    $(form).ajaxSubmit(options);
+                    return false;
+                }
+            });
+        });
+    </script>
+}
+<form id="FormSubmit" name="FormSubmit">
+    <div class="form-group">
+        <input type="text" class="form-control input-lg" name="UserName" placeholder="UserName">
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control input-lg" name="Password" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-danger btn-lg btn-block" id="btn-submit">登录</button>
+    <a href="/Home/Regist" class="btn btn-success btn-lg btn-block">没有账户？立即注册</a>
+</form>

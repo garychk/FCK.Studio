@@ -1,0 +1,69 @@
+﻿@model FCK.Studio.Dto.MemberDto
+@{
+    ViewBag.Title = "MemberEdit";
+    Layout = "~/Views/Shared/_LayoutMemberRgt.cshtml";
+}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="fck-title"><span>修改个人资料</span></div>
+        <form class="form-horizontal" id="FormEditMember" name="FormEditMember">
+            <div class="form-group">
+                <label for="Member_NickName" class="col-sm-2 control-label">昵称</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="Member_NickName" name="Member_NickName" value="@Model.Member_NickName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Name" class="col-sm-2 control-label">姓名</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="Member_Name" name="Member_Name" value="@Model.Member_Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_QQ" class="col-sm-2 control-label">QQ</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="Member_QQ" name="Member_QQ" value="@Model.Member_QQ">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Telphone" class="col-sm-2 control-label">联系电话</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="Member_Telphone" name="Member_Telphone" value="@Model.Member_Telphone">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Email" class="col-sm-2 control-label">电子邮箱</label>
+                <div class="col-sm-6">
+                    <input type="email" class="form-control" id="Member_Email" name="Member_Email" value="@Model.Member_Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Weixin" class="col-sm-2 control-label">微信号</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="Member_Weixin" name="Member_Weixin" value="@Model.Member_Weixin">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Address" class="col-sm-2 control-label">联系地址</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="Member_Address" name="Member_Address" value="@Model.Member_Address">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-6">
+                    <input type="hidden" name="Member_UserName" value="@Model.Member_UserName">
+                    <input type="hidden" name="Member_Password" value="@Model.Member_Password">
+                    <input type="hidden" id="Member_ID" name="Member_ID" value="@Model.Member_ID">
+                    <input type="hidden" name="Group_ID" value="@Model.Group_ID">
+                    <input type="hidden" name="Member_Header" value="@Model.Member_Header">
+                    <input type="hidden" name="Member_Sex" value="@Model.Member_Sex">
+                    <input type="hidden" name="Member_Amount" value="@Model.Member_Amount">
+                    <input type="hidden" name="Member_JoinTime" value="@Model.Member_JoinTime">
+                    <button type="submit" class="btn btn-success">确定</button>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+</div>

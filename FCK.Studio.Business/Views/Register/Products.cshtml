@@ -1,0 +1,62 @@
+﻿@model FCK.Studio.Dto.PageDatas<FCK.Studio.Dto.ProductDto>
+@{
+    ViewBag.Title = "商品信息";
+    Layout = "~/Views/Shared/_AppPage.cshtml";
+}
+@section scripts{
+    <script>
+        function OnSale(id, s)
+        {
+            $.post("/Register/OnSaleProduct", { ids: id, status: s }, function (response) {
+                alertE(response.message);
+            });
+        }
+
+        function RecProd(id)
+        {
+            $.post("/Register/RecProduct", { ids: id }, function (response) {
+                alertE(response.message);
+            });
+        }
+    </script>
+}
+<div class="list-group">
+    @{
+        if (Model.total > 0)
+        {
+            foreach (var item in Model.datas)
+            {
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-md-3 col-xs-3">
+                        <img src="@(FCK.Config.ImgServer)@item.Product_Pic" class="img-responsive" />
+                    </div>
+                    <div class="col-md-9 col-xs-9">
+                        <p>@item.Product_Name</p>
+                        <p>
+                            <span class="text-danger">单价：<i class="iconfont icon-money"></i>@item.Product_Price.ToString("0.00")</span>
+                            <span>销量：@item.Product_Sales</span>
+                        </p>
+                        <p>
+                            @{
+                                if (item.IsOnSale == 0)
+                                {
+                                    <button href="#" class="btn btn-danger" onclick="OnSale(@item.Product_ID, 1)">上架</button>
+                                }
+                                else
+                                {
+                                    <button href="#" class="btn btn-default" onclick="OnSale(@item.Product_ID, 0)">下架</button>
+                                }
+                            }
+                            
+                            <button href="#" class="btn @(item.IsRec==0? "btn-primary":"btn-default")" onclick="RecProd(@item.Product_ID)">@(item.IsRec==0? "推荐":"取消推荐")</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+                }
+            }
+        }
+</div>
+
+

@@ -1,0 +1,29 @@
+﻿@model FCK.Studio.Dto.OrdersJson
+@{
+    ViewBag.Title = "订单管理";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+<div class="list-group">
+    @{
+        if (Model.total > 0)
+        {
+            foreach (var item in Model.datas)
+            {
+                <a href="/Member/OrderDetail/@item.Order_Number" class="list-group-item">
+
+                    <p>订单编号：@item.Order_Number</p>
+                    <p>
+                        <span class="text-warning"><i class="iconfont icon-money"></i>&nbsp;-@item.Order_Amount</span>
+                        <span class="@(item.Order_Status<=1?"text-danger":"")">@(FCK.Config.cStatus(item.Order_Status))</span>
+                    </p>
+                    <small><i class="iconfont icon-time"></i>&nbsp;@item.Order_Time</small>
+                </a>
+            }
+        }
+        else
+        {
+            <a href="#" class="list-group-item">暂无订单</a>
+        }
+    }
+
+</div>

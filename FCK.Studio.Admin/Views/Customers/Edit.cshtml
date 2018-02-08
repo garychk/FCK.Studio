@@ -1,0 +1,229 @@
+﻿@model FCK.Studio.Dto.CustomerDto
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+<script>
+    $(function () {
+        $("#Btn_Submit").click(function () {
+            if ($("#Customer_Company").val() == "") {
+                alertE("请输入客户名！"); return false;
+            }
+            if ($("#Customer_Name").val() == "") {
+                alertE("请输入联系人！"); return false;
+            }
+            if ($("#Customer_Tel").val() == "") {
+                alertE("请输入联系电话！"); return false;
+            }
+
+            var options = {
+                url: '/Customers/CreateOrUpdate',
+                type: 'post',
+                success: function (result) {
+                    if (result.code == 100) {
+                        confirmE("编辑成功，是否返回列表？", function () {
+                            window.location = '/Customers/Index';
+                        }, function () {
+                            alertE(result.message);
+                        });
+                    }
+                    else
+                        alertE(result.message);
+                }
+            };
+            $("#SubmitForm").ajaxSubmit(options);
+            return false;
+        });
+    });
+</script>
+<ol class="breadcrumb">
+    <li><a href="/Home/Main"><i class="iconfont icon-home"></i>控制台</a></li>
+    <li><a href="/Customers/">客户管理</a></li>
+    <li class="active">客户编辑</li>
+</ol>
+<div class="panel panel-default">
+    <div class="container">
+        <h3><i class="iconfont icon-edit"></i>客户编辑</h3>
+        <hr>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <form class="form-horizontal" name="SubmitForm" id="SubmitForm">
+                    <div class="form-group">
+                        <label for="Customer_Company" class="col-sm-2 control-label">客户名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="客户名" id="Customer_Company" name="Customer_Company" value="@Model.Customer_Company">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Customer_Name" class="col-sm-2 control-label">联系人</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="联系人" id="Customer_Name" name="Customer_Name" value="@Model.Customer_Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Customer_Mobile" class="col-sm-2 control-label">手机</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="手机" id="Customer_Mobile" name="Customer_Mobile" value="@Model.Customer_Mobile">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Customer_Tel" class="col-sm-2 control-label">联系电话</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="联系电话" id="Customer_Tel" name="Customer_Tel" value="@Model.Customer_Tel">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Customer_Address" class="col-sm-2 control-label">客户地址</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="客户地址" id="Customer_Address" name="Customer_Address" value="@Model.Customer_Address">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Customer_Email" class="col-sm-2 control-label">邮箱</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="邮箱" id="Customer_Email" name="Customer_Email" value="@Model.Customer_Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Customer_Grade" class="col-sm-2 control-label">等级</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" placeholder="等级" id="Customer_Grade" name="Customer_Grade" value="@Model.Customer_Grade">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Customer_Tel" class="col-sm-2 control-label">客户类型</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="客户类型" id="Customer_Type" name="Customer_Type" value="@Model.Customer_Type">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Customer_Longitude" class="col-sm-2 control-label">经度</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="Customer_Longitude" name="Customer_Longitude" value="@Model.Customer_Longitude">
+                        </div>
+                        <label for="Customer_Latitude" class="col-sm-2 control-label">纬度</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="Customer_Latitude" name="Customer_Latitude" value="@Model.Customer_Latitude">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Customer_QQ" class="col-sm-2 control-label">QQ</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="QQ" id="Customer_QQ" name="Customer_QQ" value="@Model.Customer_QQ">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Customer_Weixin" class="col-sm-2 control-label">微信号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="微信号" id="Customer_Weixin" name="Customer_Weixin" value="@Model.Customer_Weixin">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Customer_Memo" class="col-sm-2 control-label">备注</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="备注" id="Customer_Memo" name="Customer_Memo" value="@Model.Customer_Memo">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-8">
+                            <input type="hidden" id="Customer_ID" name="Customer_ID" value="@Model.Customer_ID">
+                            <input type="hidden" id="Member_ID" name="Member_ID" value="@Model.Member_ID">
+                            <input type="hidden" id="Customer_UpdateTime" name="Customer_UpdateTime" value="@(Model.Customer_ID==0?DateTime.Now:Model.Customer_UpdateTime)">
+                            <a href="/Customers/" class="btn btn-default">返回</a>
+                            <button type="submit" class="btn btn-success" id="Btn_Submit">确定</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div id="r-result"><input type="text" class="form-control" id="suggestId" placeholder="输入关键词搜索" /></div>
+                <div id="searchResultPanel" style="display:none;"></div>
+                <div id="l-map" style="width:100%; height:500px;margin-top:5px;" class="panel panel-default"></div>
+                <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=EA8b7b9cd83f567d41e56367f7a6e9a2"></script>
+                <script type="text/javascript">
+                    var lng = "@(Model.Customer_Longitude)";
+                    var lat = "@(Model.Customer_Latitude)";
+                    var company = "@(Model.Customer_Company)";
+
+                    // 百度地图API功能
+                    function G(id) {
+                        return document.getElementById(id);
+                    }
+
+                    var map = new BMap.Map("l-map");
+                    if (lat == "" || lng == "")
+                        map.centerAndZoom("无锡", 12);
+                    else {
+                        var point = new BMap.Point(lng, lat);
+                        map.centerAndZoom(point, 12);
+
+                        var marker = new BMap.Marker(point);
+                        map.addOverlay(marker);
+                        marker.addEventListener("click", function (e) {
+                            var opts = {
+                                width: 200,
+                                height: 30,
+                                enableMessage: true
+                            };
+                            var infoWindow = new BMap.InfoWindow(company, opts);
+                            map.openInfoWindow(infoWindow, point);
+                        });
+
+                    }
+
+                    map.addEventListener("click", function (e) {
+                        $("#Customer_Longitude").val(e.point.lng);
+                        $("#Customer_Latitude").val(e.point.lat);
+                    });
+
+                    var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+                        {
+                            "input": "suggestId"
+                        , "location": map
+                        });
+
+                    ac.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
+                        var str = "";
+                        var _value = e.fromitem.value;
+                        var value = "";
+                        if (e.fromitem.index > -1) {
+                            value = _value.province + _value.city + _value.district + _value.street + _value.business;
+                        }
+                        str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+                        value = "";
+                        if (e.toitem.index > -1) {
+                            _value = e.toitem.value;
+                            value = _value.province + _value.city + _value.district + _value.street + _value.business;
+                        }
+                        str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+                        G("searchResultPanel").innerHTML = str;
+                    });
+
+                    var myValue;
+                    ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
+                        var _value = e.item.value;
+                        myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+                        G("searchResultPanel").innerHTML = "onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+
+                        setPlace();
+                    });
+
+                    function setPlace() {
+                        map.clearOverlays();    //清除地图上所有覆盖物
+                        function myFun() {
+                            var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+                            map.centerAndZoom(pp, 18);
+                            map.addOverlay(new BMap.Marker(pp));    //添加标注
+                        }
+                        var local = new BMap.LocalSearch(map, { //智能搜索
+                            onSearchComplete: myFun
+                        });
+                        local.search(myValue);
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+</div>

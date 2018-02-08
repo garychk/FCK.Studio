@@ -1,0 +1,45 @@
+﻿@model FCK.Studio.Dto.FinanceJson
+@{
+    ViewBag.Title = "账单明细";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+<div class="list-group">
+    @{
+        if (Model.total > 0)
+        {
+            foreach (var item in Model.datas)
+            {
+                <a href="#" class="list-group-item">
+
+                    <p><i class="iconfont icon-time"></i>&nbsp;<span class="app-ccc">@item.Finance_Time</span>&nbsp;
+
+                        @{
+                            if (item.Finance_Type.ToLower() == "payout")
+                            {
+                                <span>支出</span><span class="text-danger">-@item.Finance_Amount</span>
+                            }
+                            else if (item.Finance_Type.ToLower() == "comein")
+                            {
+                                <span>收入</span><span class="text-success">+@item.Finance_Amount</span>
+                            }
+                            else if (item.Finance_Type.ToLower() == "cash")
+                            {
+                                <span>提现</span><span class="text-danger">-@item.Finance_Amount</span>
+                            }
+                            else
+                            {
+                                <span>退款</span><span class="text-success">-@item.Finance_Amount</span>
+                            }
+                        }
+                        <span class="app-ccc">@item.Finance_Memo</span>
+                    </p>
+                </a>
+            }
+        }
+        else
+        {
+            <a href="#" class="list-group-item">暂无信息</a>
+        }
+    }
+
+</div>

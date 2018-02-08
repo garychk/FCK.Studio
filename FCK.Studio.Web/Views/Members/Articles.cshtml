@@ -1,0 +1,39 @@
+﻿@model FCK.Studio.Dto.MemberDto
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMemberRgt.cshtml";
+}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="fck-title"><span>我的文章</span></div>
+        <ul class="list-inline">
+            <li>
+                <div class="btn-group" role="group" aria-label="...">
+                    <a href="/Members/ArticleEdit" class="btn btn-info">发表新文章</a>
+                    <button class="btn btn-danger" onclick="DelPacth()">删除</button>
+                </div>
+            </li>
+            <li>
+                <form class="form-inline" role="form">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="快速搜索" id="keywords">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" onclick="GoSearch()">GO</button>
+                    </span>
+                </div>
+                </form>
+            </li>
+        </ul>
+        <input type="hidden" id="currentpage" value="1" />
+        <input type="hidden" id="CateId" value="@ViewData["CateId"]" />
+        <input type="hidden" id="UserId" value="@Model.Member_ID" />
+        <input type="hidden" id="editurl" value="/Members/ArticleEdit/" />
+        <input type="hidden" id="actionurl" value="/Article/GetArticles" />
+        <hr />
+        <table class="table table-hover" id="DataList">
+        </table>
+        <nav class="text-right">
+            <ul class="pagination" id="pagination"></ul>
+        </nav>
+    </div>
+</div>

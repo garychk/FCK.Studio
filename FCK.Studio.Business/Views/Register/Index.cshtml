@@ -1,0 +1,84 @@
+﻿@model FCK.Studio.Dto.RegisterDto
+@{
+    ViewBag.Title = Model.Register_Name + "—商家管理中心";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+@section scripts{
+    <script>
+        $(function () {
+            $("#btn-submit").click(function () {
+                var $btn = $(this).button('loading');
+                confirmE("确定注销？", function () {
+                    var options = {
+                        url: '/Home/Logout',
+                        type: 'post',
+                        success: function (result) {
+                            if (result.code == 100)
+                                window.location = "/";
+                            else
+                                alertE(result.message);
+                            $btn.button('reset');
+                        }
+                    };
+                    $("#FormSubmit").ajaxSubmit(options);
+                }, function () {
+                    $btn.button('reset');
+                });
+                return false;
+            });
+
+            var _stime = '@(DateTime.Now.AddDays(-1).ToShortDateString())';
+            var _etime = '@(DateTime.Now.ToShortDateString())';
+            $.post("/Register/GetAmount", { type: 'comein', keywords: '', stime: _stime, etime: _etime }, function (result) {
+                $("#TotalComein").text(result);
+            });
+        });
+    </script>
+}
+<div class="container-fluid">
+    <div class="panel panel-default app-usertop">
+        <div class="panel-body">
+            <div class="text-center">
+                <img src="~/Content/header/4.png" class="img-circle" />
+                <h4>@(Model.Register_Name)</h4>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4 col-xs-4 text-center">
+                    <h4 class="text-danger"><b id="TotalComein"></b></h4>
+                    <p>昨日收入</p>
+                </div>
+                <div class="col-md-4 col-xs-4 text-center">
+                    <h4 class="text-success">28</h4>
+                    <p>今日访客</p>
+                </div>
+                <div class="col-md-4 col-xs-4 text-center">
+                    <h4>@(Model.Register_Money.ToString("0.00"))</h4>
+                    <p>余额</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-group">
+        <a href="/Register/Message" class="list-group-item">
+            <i class="iconfont icon-announce"></i>&nbsp;消息中心<span class="badge app-bgred">4</span>
+        </a>
+        <a href="/Register/Products" class="list-group-item">
+            <i class="iconfont icon-product"></i>&nbsp;商品信息
+        </a>
+        <a href="/Register/Orders" class="list-group-item">
+            <i class="iconfont icon-orders"></i>&nbsp;订单管理<span class="badge app-bgreen">2</span>
+        </a>
+        <a href="/Register/Finance" class="list-group-item">
+            <i class="iconfont icon-baobiao1"></i>&nbsp;店铺经营报表
+        </a>
+        <a href="/Register/Setting" class="list-group-item">
+            <i class="iconfont icon-render"></i>&nbsp;店铺设置
+        </a>
+    </div>
+    <form name="FormSubmit" id="FormSubmit"><p><button type="submit" class="btn btn-danger btn-block" id="btn-submit">注销</button></p></form>
+</div>
+

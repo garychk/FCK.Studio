@@ -1,0 +1,90 @@
+﻿@model FCK.Studio.Dto.ExtraDto
+@{
+    ViewBag.Title = "ExtraEdit";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+<script>
+    $(function () {
+        $("#Btn_Submit").click(function () {
+
+            if ($("#ExtraName").val() == "") {
+                alertE("请输入属性名！"); return false;
+            }
+            var options = {
+                url: '/Extra/CreateOrUpdate',
+                type: 'post',
+                success: function (result) {
+                    if (result.code == 100) {
+                        confirmE("编辑成功，是否返回列表？", function () {
+                            window.location = '/Products/Extra';
+                        }, function () {
+                            alertE(result.message);
+                        });
+                    }
+                    else
+                        alertE(result.message);
+                }
+            };
+            $("#SubmitForm").ajaxSubmit(options);
+            return false;
+        });
+    });
+</script>
+<ol class="breadcrumb">
+    <li><a href="/Home/Main"><i class="iconfont icon-home"></i>控制台</a></li>
+    <li><a href="/Products/">产品管理</a></li>
+    <li><a href="/Products/Extra/@(Request.QueryString["productid"])">属性管理</a></li>
+    <li class="active">属性编辑</li>
+</ol>
+<div class="panel panel-default">
+    <div class="container">
+        <h3><i class="iconfont icon-edit"></i>属性@(Model.ExtraName)编辑</h3>
+        <hr>
+        <form class="form-horizontal" name="SubmitForm" id="SubmitForm">
+
+            <div class="form-group">
+                <label for="Member_Mobile" class="col-sm-2 control-label">属性名</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" placeholder="属性名" id="ExtraName" name="ExtraName" value="@Model.ExtraName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Mobile" class="col-sm-2 control-label">属性值</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" placeholder="属性值" id="ExtraValue" name="ExtraValue" value="@Model.ExtraValue">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Mobile" class="col-sm-2 control-label">属性类型</label>
+                <div class="col-sm-6">
+                    <select class="form-control" id="ExtraType" name="ExtraType">
+                        <option value="text">text</option>
+                        <option value="number">number</option>
+                        <option value="date">date</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Weixin" class="col-sm-2 control-label">简介</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" placeholder="简介" id="ExtraIntro" name="ExtraIntro" value="@Model.ExtraIntro">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Mobile" class="col-sm-2 control-label">排序</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" id="ExtraOrder" name="ExtraOrder" value="@Model.ExtraOrder">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <input type="hidden" id="ID" name="ID" value="@Model.ID">
+                    <input type="hidden" id="ExtraOutID" name="ExtraOutID" value="@(Request.QueryString["productid"])">
+                    <button type="reset" class="btn btn-info">重设</button>
+                    <button type="submit" class="btn btn-success" id="Btn_Submit">确定</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

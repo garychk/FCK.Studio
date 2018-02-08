@@ -1,0 +1,131 @@
+﻿@using FCK.Studio.Frame.Core
+@{
+    ViewBag.Title = "云助手";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+<script>
+
+    $(document).ready(function () {
+        CreatCalendar();
+
+        $("#EventAdd").click(function () {
+            OpenWin("添加事务", "/Home/EventAdd", "col-md-12");
+            return false;
+        });
+    });
+    
+    function EventsData(_id, _title, _start, _end, _grade, _url) {
+        var _color = "";
+        switch (_grade)
+        {
+            case 1:
+                _color = "#ff0000";
+                break;
+            case 2:
+                _color = "#53d192";
+                break;
+            case 3:
+                _color = "#3A87AD";
+                break;
+        }
+        
+        var seconds = parseInt(_start.replace(/\D/igm, ""));
+        var d = new Date(seconds);
+        var sdate = d.Format("yyyy-MM-dd");
+
+        seconds = parseInt(_end.replace(/\D/igm, ""));
+        d = new Date(seconds);
+        var edate = d.Format("yyyy-MM-dd");
+
+        this.id = _id;
+        this.title = _title;
+        this.start = sdate;
+        this.end = edate;
+        this.borderColor = _color;
+        this.backgroundColor = _color;
+        this.url = _url;
+    }
+
+    function CreatCalendar()
+    {
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'title',
+                center: '',
+                right: 'today prev,next'
+                //right: 'month,basicWeek,basicDay'
+            },
+            defaultView: 'month',
+            editable: true,
+            monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            monthNamesShort: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+            dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+            buttonText: {
+                today: '今天',
+                month: '月',
+                week: '周',
+                day: '日'
+            },
+            eventClick: function (event, jsEvent, view) {
+                var start = new Date(event.start);
+                var s = start.Format("yyyy-MM-dd");
+                var end = new Date(event.end);
+                var d = end.Format("yyyy-MM-dd");
+                alertE('' + s + '至' + d + '<br>' + event.title);
+            },
+            dayClick: function (date, allDay, jsEvent, view) {
+                var date = new Date(date);
+                var sdate = date.Format("yyyy-MM-dd");
+                OpenWin("添加事务", "/Home/EventAdd?date=" + sdate, "col-md-12");
+            },
+            events: function (start, end, timezone, callback) {
+                var evts = new Events();
+                evts.GetPageList("FormGetPageList");
+                if (evts.datas.datas != null) {
+                    var eventsData = new Array();
+                    var items = evts.datas.datas.datas;
+                    for (var i = 0; i < items.length; i++) {
+                        var d = items[i];
+                        var obj = new EventsData(d.Event_ID, d.Event_Name, d.Event_StartTime, d.Event_EndTime, d.Event_Grade, "");
+                        eventsData.push(obj);
+                    }
+                    callback(eventsData);
+                }
+            }
+        });
+    }
+</script>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div id='calendar'></div>
+    </div>
+</div>
+<button type="button" class="hide" data-toggle="modal" data-target="#eventModel" id="openModel"></button>
+<div class="modal fade" id="eventModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <span class="modal-title" id="eventModelLabel">事件</span>
+            </div>
+            <div class="modal-body">
+                <div id="modal-content"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="navbar-fixed-bottom text-center">
+    <a href="/Home/EventAdd" id="EventAdd"><i class="iconfont icon-add" style="font-size:50px"></i></a>
+</nav>
+<form id="FormGetPageList" class="hide">
+    <input type="text" name="page" value="1" />
+    <input type="text" name="pageSize" value="0" />
+    <input type="text" name="memberid" value="@(CookieHelper.CookieVal("UserId"))" />
+    <input type="text" name="keywords" value="" />
+    <input type="text" name="status" value="" />
+    <input type="text" name="stime" value="" />
+    <input type="text" name="etime" value="" />
+    <button type="button" id="LoadEvent"></button>
+</form>

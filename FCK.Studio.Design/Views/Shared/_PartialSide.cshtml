@@ -1,0 +1,36 @@
+﻿@model FCK.Studio.Core.PageDatas<FCK.Studio.Core.ArticleDto>
+@{
+    var news = Model.datas.Where(o => o.Article_CateName == "公司新闻").ToList();
+    var articles = Model.datas.Where(o => o.Article_CateName == "视点").ToList();
+}
+<div class="fh5co-sidebox">
+    <h3 class="fh5co-sidebox-lead">最新动态</h3>
+    <ul class="fh5co-post">
+        @foreach(var item in news){
+        <li>
+            <a href="/Home/Detail/@item.Article_ID">
+                <div class="fh5co-post-media">
+                    <img src="@(FCK.Common.Utility.ImgServer)@(item.Article_PicSmall)" alt="@item.Article_Title"></div>
+                <div class="fh5co-post-blurb">@item.Article_Title<span class="fh5co-post-meta">@item.Article_UpdateTime</span>
+                </div>
+            </a>
+        </li>
+        }
+    </ul>
+
+</div>
+
+<div class="fh5co-sidebox">
+    <h3 class="fh5co-sidebox-lead">我们的视点</h3>
+    <p>我们不仅仅参与其中，我们更热衷于给客户一个好的印象，更热衷于把最好的东西展现给客户。隔行如隔山，话虽如此，但是如果以此为借口怠慢客户那就是自己的错。</p>
+</div>
+
+<div class="fh5co-sidebox">
+    <h3 class="fh5co-sidebox-lead">热门视点</h3>
+    <ul class="fh5co-list-check">
+        @foreach (var item in articles)
+        {
+        <li><a href="/Home/Detail/@item.Article_ID">@item.Article_Title</a></li>
+        }
+    </ul>
+</div>

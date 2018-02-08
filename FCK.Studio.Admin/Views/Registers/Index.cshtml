@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+<script>
+    $(function () {
+        LoadDatas();
+    });
+    function LoadDatas() {
+        var _keywords = $("#keywords").val();
+        var _page = parseInt($("#currentpage").val());
+        $("#DataList").html('<center><img src="/Content/images/loading.gif" /></center>');
+        $.ajax({
+            type: "POST",
+            url: "/Registers/GetPageList",
+            data: {
+                page: _page,
+                pageSize: 10,
+                keywords: _keywords
+            },
+            success: function (result) {
+                var items = result.datas;
+                var pages = result.pages;
+                var total = result.total;
+                var htmls = '';
+                htmls += '<tr>';
+                htmls += '<td><input type="checkbox" id="SelAll"> 全选</td>';
+                htmls += '<td>租户编号</td>';
+                htmls += '<td>租户名</td>';
+                htmls += '<td>联系人</td>';
+                htmls += '<td>联系电话</td>';
+                htmls += '<td>截止日期</td>';
+                htmls += '<td>状态</td>';
+                htmls += '<td>操作</td>';
+                htmls += '</tr>';
+                for (var i = 0; i < items.length; i++) {
+                    htmls += '<tr>';
+                    htmls += '<td><input type="checkbox" name="register" value="' + items[i].Register_ID + '"></td>';
+                    htmls += '<td>' + items[i].Register_Number + '</td>';
+                    htmls += '<td>' + items[i].Register_Name + '</td>';
+                    htmls += '<td>' + items[i].Register_Contactor + '</td>';
+                    htmls += '<td>' + items[i].Register_Telphone + '</td>';
+                    htmls += '<td>' + TimeFormat(items[i].Register_DeadLine, "yyyy-MM-dd") + '</td>';
+                    if (items[i].Register_Status == 1)
+                        htmls += '<td><i class="glyphicon glyphicon-ok colorGreen"></i></td>';
+                    else
+                        htmls += '<td><i class="glyphicon glyphicon-remove colorRed"></i></td>';
+                    htmls += '<td><a href="/Registers/Edit/' + items[i].Register_ID + '" class="btn btn-primary">编辑</a></td>';
+                    htmls += '</tr>';
+                }
+                $("#DataList").html(htmls);
+                $("#pagination").html(Pagination(_page, pages, total));
+            }
+        });
+        return false;
+    }
+
+    function Lock(_status) {
+        var ids = "";
+        $("#DataList input[name=register]").each(function () {
+            if ($(this).prop("checked")) {
+                if (ids == "")
+                    ids += $(this).val();
+                else
+                    ids += "," + $(this).val();
+            }
+        });
+        if (ids == "") {
+            alertE("请至少选择一项！"); return false;
+        } else
+            UpdateStatus(ids, _status);
+    }
+
+    function UpdateStatus(_id, _status) {
+        $.ajax({
+            type: "POST",
+            url: "/Registers/UpdateStatus",
+            data: { ids: _id, status: _status },
+            success: function (result) {
+                if (result.code == 100)
+                    LoadDatas();
+                else
+                    alertE(result.message);
+            }
+        });
+    }
+
+    function Deadline(days) {
+        var ids = "";
+        $("#DataList input[name=register]").each(function () {
+            if ($(this).prop("checked")) {
+                if (ids == "")
+                    ids += $(this).val();
+                else
+                    ids += "," + $(this).val();
+            }
+        });
+        if (ids == "") {
+            alertE("请至少选择一项！"); return false;
+        } else
+            UpdateDeadLine(ids, days);
+    }
+
+    function UpdateDeadLine(_id, _days) {
+        $.ajax({
+            type: "POST",
+            url: "/Registers/UpdateDeadLine",
+            data: { ids: _id, days: _days },
+            success: function (result) {
+                if (result.code == 100)
+                    LoadDatas();
+                else
+                    alertE(result.message);
+            }
+        });
+    }
+</script>
+<ol class="breadcrumb">
+    <li><a href="/Home/Main"><i class="iconfont icon-home"></i>控制台</a></li>
+    <li class="active">租户管理</li>
+</ol>
+<div class="panel panel-default">
+    <div class="container">
+        <h3><i class="iconfont icon-render"></i>租户管理</h3>
+        <hr>
+        <div class="pull-right">
+        </div>
+        <ul class="list-inline">
+            <li>
+                <div class="btn-group" role="group" aria-label="...">
+                    <a class="btn btn-info" href="/Registers/Edit">添加</a>
+                    <button type="button" class="btn btn-danger" onclick="Lock(0)">锁定</button>
+                    <button type="button" class="btn btn-success" onclick="Lock(1)">解锁</button>
+                    <button type="button" class="btn btn-primary" onclick="LoadDatas()">刷新</button>
+                    <button type="button" class="btn btn-default" onclick="Deadline(31)">续费一个月</button>
+                    <button type="button" class="btn btn-default" onclick="Deadline(92)">续费三个月</button>
+                    <button type="button" class="btn btn-default" onclick="Deadline(365)">续费一年</button>
+                </div>
+            </li>
+            <li>
+                <form class="form-inline" role="form">
+                    <input type="hidden" id="currentpage" value="1" />
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="keywords" placeholder="快速搜索">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" onclick="GoSearch()">搜索</button>
+                        </span>
+                    </div>
+                </form>
+            </li>
+        </ul>
+
+        <table class="table table-hover" id="DataList"></table>
+        <hr>
+        <nav class="rgt">
+            <ul class="pagination" id="pagination"></ul>
+        </nav>
+
+    </div>
+</div>

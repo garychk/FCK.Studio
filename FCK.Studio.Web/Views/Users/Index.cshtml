@@ -1,0 +1,62 @@
+﻿@using FCK.Common
+@model FCK.Studio.Dto.MemberDto
+@{
+    ViewBag.Title = Model.Member_NickName+"的主页";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+@section scripts{
+    <script>
+        $(function () {
+            $('#myTabs a').click(function (e) {
+                e.preventDefault()
+                $(this).tab('show')
+            });
+        });
+    </script>
+}
+<div class="container  fck-m-top minH800">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist" id="myTabs">
+                            <li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">TA发布的资源</a></li>
+                            <li role="presentation"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab" onclick="GoSearch()">TA的博文</a></li>
+                        </ul>
+                        <br />
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="tab1">
+                                @Html.Action("_PartialResources", "Resources", new { page = 1, pageSize = 12, cateid = 0, tag = "", memberid = Model.Member_ID })
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="tab2">
+                                <form class="form-inline" id="FormSearch" name="FormSearch">
+                                    <input type="hidden" name="page" id="page" value="1">
+                                    <input type="hidden" name="cateid" id="cateid" value="0">
+                                    <input type="hidden" name="catename" id="catename" value="博文">
+                                    <input type="hidden" id="action" value="/Article/PartialArticles" />
+                                    <input type="hidden" id="renderid" value="ArticleList" />
+                                    <input type="hidden" name="pageSize" id="pageSize" value="0" />
+                                    <input type="hidden" name="ispage" id="ispage" value="1" />
+                                    <input type="hidden" name="memberid" id="memberid" value="@Model.Member_ID" />
+                                </form>
+                                <div id="ArticleList">
+                                    <img src="~/Content/images/loading.gif" /></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @Html.Action("_PartialMemberInfo", "Article", new { memberid = Model.Member_ID })
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

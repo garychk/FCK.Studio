@@ -1,0 +1,37 @@
+﻿@model List<FCK.Studio.Dto.FCKAPIParaDto>
+@{
+    ViewBag.Title = ViewData["API_Title"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading">
+            <h4 class="panel-title">
+                @(ViewData["API_Title"])接口参数(@ViewData["API"])
+            </h4>
+        </div>
+        <div class="panel-collapse collapse in" role="tabpanel">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tr>
+                        <td>参数名</td>
+                        <td>参数类型</td>
+                        <td>必填</td>
+                        <td>长度</td>
+                        <td>参数说明</td>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Para_Name</td>
+                            <td>@item.Para_Type</td>
+                            <td>@(item.Para_Required==1?"是":"否")</td>
+                            <td>@item.Para_Length</td>
+                            <td>@item.Para_Intro</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

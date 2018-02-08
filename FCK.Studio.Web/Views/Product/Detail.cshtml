@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<script>
+    $(function () {
+        //var slider = new Slider("#slider");
+        //slider.on("slide", function (slideEvt) {
+        //    $("#SliderVal").text(slideEvt.value);
+        //});
+
+        $('.daysRange').jRange({
+            from: 0,
+            to: 12,
+            step: 1,
+            scale: ['0', '3', '6', '9', '12'],
+            format: '%s',
+            width: 300,
+            showLabels: true,
+            isRange: false,
+            onstatechange: function () {
+                $("#SliderVal").text(this.options.value);
+            }
+        });
+
+    });
+</script>
+<div class="fck-banner">
+    <div class="container">
+        <h1>Innovation distinguishes between a leader and a follower.</h1>
+        <p>We're here to put a dent in the universe. Otherwise why else even be here?</p>
+    </div>
+</div>
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="/Home/">首页</a></li>
+        <li><a href="/Product/">产品&服务</a></li>
+        <li class="active">DELL R720 服务器 RAID阵列卡配置介绍</li>
+    </ol>
+    <div class="row fck-m-top">
+        <div class="col-md-9">
+            <p class="colorf60"><span class="glyphicon glyphicon-info-sign"></span>在下面自定义软件的功能，选择使用时间，确定软件版本，即可下单购买。</p>
+            <div class="fck-body">
+                <dl class="dl-horizontal fck-prdconfig">
+                    <dt>产品名称：</dt>
+                    <dd>泰洁e洗商家平台</dd>
+                    <dt>应用地址：</dt>
+                    <dd>http://clean.my80.cn</dd>
+                    <dt>产品类型：</dt>
+                    <dd>
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button type="button" class="btn btn-success">简易型</button>
+                            <button type="button" class="btn btn-default">标准型</button>
+                            <button type="button" class="btn btn-default">旗舰型</button>
+                        </div>
+                    </dd>
+                    <dt>产品功能：</dt>
+                    <dd>
+                        <div class="fck-funlist">
+                            <input type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                            产品管理<br />
+                            <input type="checkbox" id="Checkbox1" value="option1" aria-label="...">
+                            订单管理<br />
+                            <input type="checkbox" id="Checkbox2" value="option1" aria-label="...">
+                            会员管理<br />
+                            <input type="checkbox" id="Checkbox3" value="option1" aria-label="...">
+                            财务管理<br />
+                            <input type="checkbox" id="Checkbox5" value="option1" aria-label="...">
+                            系统设置
+                        </div>
+                    </dd>
+                    <dt>购买时长：</dt>
+                    <dd>
+                        <ul class="list-inline">
+                            <li>
+                                <input class="daysRange" type="hidden" value="6" /></li>
+                            <li><span id="SliderVal">6</span>个月</li>
+                        </ul>
+
+
+                    </dd>
+                    <dt>使用文档：</dt>
+                    <dd><span class="glyphicon glyphicon-download"></span>API文档</dd>
+                </dl>
+                <div class="clrfix"></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="fck-body">
+                <p class="lead">购买清单</p>
+                <hr />
+                <dl class="dl-horizontal fck-orderlist">
+                    <dt class="color9">类型：</dt>
+                    <dd>旗舰版</dd>
+                    <dt class="color9">功能：</dt>
+                    <dd>产品管理</dd>
+                    <dt class="color9">时长：</dt>
+                    <dd>1年</dd>
+                </dl>
+                <hr />
+                <small>总金额：</small>
+                <h3 class="colorf60">￥1080</h3>
+                <hr />
+                <button class="btn btn-danger">确定购买</button>
+                <button class="btn btn-default">加入清单</button>
+            </div>
+        </div>
+    </div>
+</div>

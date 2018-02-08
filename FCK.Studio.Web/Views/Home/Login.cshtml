@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<script src="~/Content/js/fck-logreg.js"></script>
+<div class="fck-banner">
+    <div class="container">
+        <h1>登录</h1>
+        <p>这里有海量的解决方案，这里是集思广益、大数据大智慧，何必单打独斗呢？</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row fck-m-tops">
+        <div class="col-md-6">
+            <h3>已有账号</h3>
+            <hr>
+            <form id="FormLogin" name="FormLogin">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="UserName" name="UserName" placeholder="请输入用户名或注册邮箱" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="Password" name="Password" placeholder="Password" required>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox">
+                        记住用户名   
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-info btn-lg">登录</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h3>没有账号</h3>
+            <hr>
+            <h4><a href="/Home/Regist">立即注册</a></h4>
+            <p>
+                合作账户登录：<img src="/Content/img/Connect_logo_qq.png" height="30" />
+            </p>
+        </div>
+    </div>
+</div>

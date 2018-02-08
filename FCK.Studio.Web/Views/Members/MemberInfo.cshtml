@@ -1,0 +1,31 @@
+﻿@model FCK.Studio.Dto.MemberDto
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMemberRgt.cshtml";
+}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="fck-title"><span>会员中心</span></div>
+        <div class="navbar-left">
+            <img src="/Content/img/blank.gif" data-original="@Model.Member_Header" height="80" class="lazy" id="UserHeader" />
+            <div class="text-center"><a href="@Model.Member_ID" id="UpdateUserHeader">更新头像</a></div>
+        </div>
+        <div class="navbar-left">
+            <dl class="dl-horizontal fck-member-info">
+                <dt>会员名：</dt>
+                <dd><strong>@Model.Member_UserName</strong>，您好！</dd>
+                <dt>会员积分：</dt>
+                <dd>@Model.Member_Points</dd>
+                <dt>会员余额：</dt>
+                <dd class="colorf00">￥<strong>@Model.Member_Amount.ToString("0.00")</strong> @*<a href="/Members/GoCharge">立即充值</a>*@</dd>
+                <dt>电子邮箱：</dt>
+                <dd>@Model.Member_Email</dd>
+                <dt></dt>
+                <dd><a href="/Members/MemberEdit" class="btn btn-info fck-mt20">修改个人资料</a></dd>
+            </dl>
+            
+        </div>
+
+
+    </div>
+</div>

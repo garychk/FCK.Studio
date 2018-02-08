@@ -1,0 +1,103 @@
+﻿@model FCK.Studio.Design.Models.HomeModel
+@{
+    ViewBag.Title = "时优谷无锡网页设计第一品牌|自适应网页设计|自适应网站开发|HTML5网页制作|Bootstrap网站|网站优化";
+    ViewBag.description = "时优谷（GOOSTUDIO）是一家专注于HTML5网站建设，微信开发，API定制开发，以及SEO优化和网站推广的创新设计工作室。工作室成立于 2014年初，在网页设计和互联网应用开发领域有着独特理解。";
+    ViewBag.keywords = "自适应网页设计|自适应网站开发|HTML5网页制作|Bootstrap网站|网站优化|无锡微信开发|无锡APP开发";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+<div class="fh5co-slider">
+    <div class="owl-carousel owl-carousel-fullwidth">
+        @foreach (var item in Model.Item_Banner)
+        {
+            <div class="item" style="background-image: url(@(FCK.Common.Utility.ImgServer)@(item.Article_Pic))">
+                <div class="fh5co-overlay"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="fh5co-owl-text-wrap">
+                                <div class="fh5co-owl-text text-center to-animate">
+                                    <h1 class="fh5co-lead">@(item.Article_Title)</h1>
+                                    <h2 class="fh5co-sub-lead">@(item.Article_Brief)</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div id="fh5co-main">
+    <!-- Features -->
+
+    <div id="fh5co-features">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-8 col-md-offset-2">
+                    <h2 class="fh5co-section-lead">Our Service</h2>
+                    <h3 class="fh5co-section-sub-lead">时优谷是一家专注于HTML5网站建设，微信开发，API定制开发，以及新媒体运营的创新工作室。工作室成立于 2014年初，在网页设计和互联网应用开发领域有着独特理解。</h3>
+                </div>
+                <div class="fh5co-spacer fh5co-spacer-md"></div>
+            </div>
+            <div class="row">
+                @{
+                    int i = 0;
+                }
+                <div class="col-md-6 col-sm-6 fh5co-feature-border">
+                    @foreach (var item in Model.Item_Service.Take(2))
+                    {
+                    
+                        <div class="fh5co-feature @(i % 2 != 0 ? "no-border" : "")">
+                            <div class="fh5co-feature-icon to-animate">
+                                <i class="@(item.Article_Author)"></i>
+                            </div>
+                            <div class="fh5co-feature-text">
+                                <h3>@(item.Article_Title)</h3>
+                                <p>@(item.Article_Brief)</p>
+                                <p><a href="/Home/Detail/@(item.Article_ID)">Read more</a></p>
+                            </div>
+                        </div>
+                        i++;
+                    }
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    @{
+                        i = 0;
+                    }
+                    @foreach (var item in Model.Item_Service.Skip(2).Take(2))
+                    {
+                        <div class="fh5co-feature @(i % 2 != 0 ? "no-border" : "")">
+                            <div class="fh5co-feature-icon to-animate">
+                                <i class="@(item.Article_Author)"></i>
+                            </div>
+                            <div class="fh5co-feature-text">
+                                <h3>@(item.Article_Title)</h3>
+                                <p>@(item.Article_Brief)</p>
+                                <p><a href="/Home/Detail/@(item.Article_ID)">Read more</a></p>
+                            </div>
+                        </div>
+                        i++;
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Features -->
+
+
+    <div class="fh5co-spacer fh5co-spacer-lg"></div>
+    <!-- Products -->
+    <div class="container" id="fh5co-products">
+        <div class="row text-left">
+            <div class="col-md-12">
+                <h2 class="fh5co-section-lead">Our works</h2>
+                <h3 class="fh5co-section-sub-lead">当人们的空间被各种物质挤压的时候，也就失去了本质，我们要去掉一切虚假的、表面的、无用的东西，而剩下真实的、本质的、必不可少的东西，因而得到更多的空间、更多的舒适、更多的效率、更多的美…</h3>
+            </div>
+            <div class="fh5co-spacer fh5co-spacer-md"></div>
+        </div>
+        @Html.Action("_PartialArticles", "Home", new { page = 1, pageSize = 4, catename = "案例", orderindex = "timedesc", isrec = 1, ispage = 0 })
+    </div>
+    <!-- Products -->
+    <div class="fh5co-spacer fh5co-spacer-lg"></div>
+
+ </div>

@@ -1,0 +1,36 @@
+﻿<!-- Header -->
+<nav class="navbar navbar-wrapper fck-header">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><b>Oplug</b><b class="colorf00">+</b></a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right" id="menus">
+                <li><a href="/" class="selected" id="home">首页</a></li>
+                <li><a href="/Article/" id="article">博文</a></li>
+                <li><a href="/Resources/" id="resources">资源</a></li>
+                @*<li><a href="/Discover/" id="Discover">发现</a></li>*@
+                <li><a href="/Home/Contact" id="contact">联系</a></li>
+                @if (Request.Cookies["UserName"] == null)
+                {
+                    <li><a href="/Home/Login">登录</a></li>
+                    <li><a href="/Home/Regist">注册</a></li>
+                }
+                else
+                {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="@ViewData["UserHeader"]" height="20" class="img-circle" /> @Request.Cookies["UserName"].Value<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Members/"><i class="glyphicon glyphicon-user"></i> 会员中心</a></li>
+                            <li><a href="#" onclick="Logout()"><i class="glyphicon glyphicon-off"></i> 退出登录</a></li>
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav>

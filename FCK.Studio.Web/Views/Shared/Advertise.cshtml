@@ -1,0 +1,15 @@
+﻿@model FCK.Studio.Dto.AdvDto
+<div style="width:@(Model.width)px; height:@(Model.height)px" data-tag="@Model.advtag">
+    <div class="fck-adv">广告</div>
+    @if (Model.isdiy > 0)
+    {
+        @Html.Raw(Model.advcon) 
+    }
+    else
+    {
+    
+        <a href="@Model.advurl" target="@Model.target" title="@Model.advname">
+            <img src="@(Model.advpic)" width="@(Model.width)" height="@(Model.height)"></a>
+    
+    }
+</div>

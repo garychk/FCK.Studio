@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Regist";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<script src="~/Content/js/fck-logreg.js"></script>
+<div class="fck-banner">
+    <div class="container">
+        <h1>用户注册</h1>
+        <p>这里有海量的解决方案，这里是集思广益、大数据大智慧，何必单打独斗呢？</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row fck-m-top">
+        <div class="col-md-6">
+            <h3>注册新账户</h3>
+            <hr>
+            <form id="FormRegist" name="FormRegist">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="Member_UserName" name="Member_UserName" placeholder="请输入用户名">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="Member_Password" name="Member_Password" placeholder="请输入密码">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="Confirm_Password" placeholder="确认密码">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="Member_Email" name="Member_Email" placeholder="请输入有效邮箱">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="Member_Mobile" name="Member_Mobile" placeholder="请输入手机号码">
+                </div>
+                <div class="form-group">
+                    <ul class="list-inline">
+                        <li><input type="text" id="vcode" name="vcode" class="form-control" placeholder="请输入图形验证码" required /></li>
+                        <li><img src="/Base/VeriCode" onclick="javascript:this.src='/Base/VeriCode?tm='+Math.random()" id="ChgCodeImg" /></li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="iAgreeLaw" name="iAgreeLaw" required />
+                    我已阅读并同意<a href="#">《MY80网站使用条款》</a>
+                    
+                </div>
+                <div class="form-group"><button type="submit" class="btn btn-info btn-lg">同意并注册</button></div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h3>已有账号</h3>
+            <hr>
+            <h4><a href="/Home/Login">立即登录</a></h4>
+            <p>
+                合作账户登录：<img src="/Content/img/Connect_logo_qq.png" height="30" />
+            </p>
+        </div>
+    </div>
+</div>

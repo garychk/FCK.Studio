@@ -1,0 +1,32 @@
+﻿@model FCK.Studio.Dto.PageDatas<FCK.Studio.Dto.ShareDto>
+@{
+    ViewBag.Title = "我的分享";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+<div class="list-group">
+    @{
+        if (Model.total > 0)
+        {
+            foreach (var item in Model.datas)
+            {
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3"><a href="/Products/Detail/@item.Product_ID"><img src="@(FCK.Config.ImgServer)@(item.Product_Pic)" class="img-responsive"></a></div>
+                        <div class="col-md-9 col-xs-9">
+                            <ul class="list-unstyled">
+                                <li>分享码：@item.Share_Code</li>
+                                <li>品名：<a href="/Products/Detail/@item.Product_ID?sharecode=@item.Share_Code">@item.Product_Name</a></li>
+                                <li>单价：<span class="iconfont icon-money"></span>@item.Product_Price.ToString("0.00")</li>
+                                <li>佣金：<span class="iconfont icon-money"></span>@item.Share_Money.ToString("0.00")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <a href="#" class="list-group-item">暂无信息</a>
+        }
+    }
+</div>
