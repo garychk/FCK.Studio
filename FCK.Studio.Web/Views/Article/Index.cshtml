@@ -1,0 +1,55 @@
+﻿@using FCK.Common
+@{
+    ViewBag.Title = "博文";
+    ViewBag.Description = "Oplug致力于开创一个免费、共享、开放的互联网资源共享平台，为广大互联网开发者提供一个最好的技术交流社区";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="fck-banner">
+    <div class="container">
+        <h3>那种将业务逻辑交由业务界面处理的快速UI方式是旁门左道</h3>
+        <p>我们常常会因为眼前的困难而阻碍我们前进的脚步，放眼一望其实是那么的渺小，只要你坚持......</p>
+    </div>
+</div>
+<div class="container fck-m-top minH800">
+
+    <div class="row">
+        <div class="col-md-9">
+            <div class="fck-w">
+                <div id="ArticleList">
+                    @Html.Action("PartialArticles", "Article", new { page = 1, pageSize = 10, catename = "博文", cateid = Utility.cInt(Request.QueryString["cid"]), tag = Request.QueryString["tag"], ispage = 1 })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="fck-w">
+                
+                <div class="input-group">
+                    <form class="form-inline" id="FormSearch" name="FormSearch">
+                        <input type="text" class="form-control" placeholder="输入关键词搜索" name="keywords">
+                        <input type="hidden" name="page" id="page" value="1">
+                        <input type="hidden" name="cateid" id="cateid" value="@Utility.cInt(Request.QueryString["cateid"])">
+                        <input type="hidden" name="catename" id="catename" value="博文">
+                        <input type="hidden" name="tag" id="tag" value="@Request.QueryString["tag"]">
+                        <input type="hidden" id="action" value="/Article/PartialArticles" />
+                        <input type="hidden" id="renderid" value="ArticleList" />
+                        <input type="hidden" name="pageSize" id="pageSize" value="10" />
+                        <input type="hidden" name="ispage" id="ispage" value="1" />
+                    </form>
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger" type="button" onclick="GoSearch()"><i class="glyphicon glyphicon-search"></i></button>
+                    </span>
+                </div>
+            </div>
+            <div class="fck-w">
+                <div class="fck-title-red"><span>博文分类</span></div>
+                @Html.Action("PartialCategory", "Article", new { catename = "博文" })
+            </div>
+            <div class="fck-w">
+                <div class="fck-title-red"><span>热门标签</span></div>
+                <div class="fck-tags">
+                    @Html.Action("PartialTags", "Article", new { catename = "博文", top = 30, url = "/Article/" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

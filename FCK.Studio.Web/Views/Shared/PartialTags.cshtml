@@ -1,0 +1,5 @@
+﻿@model FCK.Studio.Dto.StringList
+
+@foreach (var item in Model.datas){
+<a href="@ViewData["listurl"]?tag=@item" class="btn btn-info" role="button">@item</a>
+}

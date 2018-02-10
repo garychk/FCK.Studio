@@ -1,0 +1,29 @@
+﻿@model FCK.Studio.Dto.MemberDto
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMemberRgt.cshtml";
+}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="fck-title"><span>修改密码</span></div>
+        <form class="form-horizontal" id="FormResetPsw" name="FormResetPsw">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">用户名：</label>
+                <div class="col-sm-10">
+                    @Model.Member_UserName
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newPassword" class="col-sm-2 control-label">新密码：</label>
+                <div class="col-sm-3">
+                    <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">确定</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

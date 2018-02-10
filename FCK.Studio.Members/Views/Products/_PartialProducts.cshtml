@@ -1,0 +1,45 @@
+﻿@using FCK.Studio.Dto
+@model PageDatas<ProductDto>
+<div class="list-group">
+    @{
+        if (Model.total > 0)
+        {
+            foreach (var item in Model.datas)
+            {
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3">
+                            <a href="/Products/Detail/@item.Product_ID">
+                                @{
+                                    if (!string.IsNullOrEmpty(item.Product_Pic))
+                                    {
+                                        <img src="@(FCK.Config.ImgServer)@(item.Product_Pic)" class="img-responsive">
+                                    }
+                                    else
+                                    {
+                                        <img src="/Content/img/blank.png" class="img-responsive">
+                                    }
+                                }
+                            </a>
+                        </div>
+                        <div class="col-md-9 col-xs-9">
+                            <p class="list-group-item-heading"><a href="/Products/Detail/@item.Product_ID">@(item.Product_Name)</a></p>
+                            <p>
+                                <span class="text-danger"><i class="iconfont icon-money"></i>@(item.Product_Price.ToString("0.00"))</span>
+                                <span>销量：@(item.Product_Sales)</span>
+                            </p>
+                            <p>
+                                <a href="/Products/Detail/@item.Product_ID" class="btn btn-danger">立即购买</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div>暂无结果</div>
+                                        }
+                                    }
+
+</div>

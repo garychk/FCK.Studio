@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.description" />
+	<meta name="keywords" content="@ViewBag.keywords" />
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="/favicon.ico">
+    	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="/Content/themes/IT/css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="/Content/themes/IT/css/icomoon.css">
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="/Content/themes/IT/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="/Content/themes/IT/css/owl.theme.default.min.css">
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="/Content/themes/IT/css/magnific-popup.css">
+    <!-- toast -->
+    <link rel="stylesheet" href="/Content/themes/IT/css/jquery.toast.min.css" />
+	<!-- Theme Style -->
+	<link rel="stylesheet" href="/Content/themes/IT/css/style.css">
+	<!-- Modernizr JS -->
+	<script src="/Content/themes/IT/js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="/Content/themes/IT/js/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+    <header id="fh5co-header" role="banner">
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header"> 
+				<!-- Mobile Toggle Menu Button -->
+				<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#fh5co-navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+				<a class="navbar-brand" href="/Home/">GooStudio</a>
+				</div>
+				<div id="fh5co-navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="@(ViewData["page"]=="home"?"active":"")"><a href="/Home/"><span>首页<span class="border"></span></span></a></li>
+						<li class="@(ViewData["page"]=="about"?"active":"")"><a href="/Home/About"><span>关于我们<span class="border"></span></span></a></li>
+						<li class="@(ViewData["page"]=="contact"?"active":"")"><a href="/Home/Contact"><span>联系我们<span class="border"></span></span></a></li>
+						<li class="@(ViewData["page"]=="works"?"active":"")"><a href="/Home/Works"><span>精彩案例<span class="border"></span></span></a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+        @RenderBody()
+    <footer id="fh5co-footer">
+		
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-sm-6">
+					<div class="fh5co-footer-widget">
+						<p>时优谷（GOOSTUDIO）是一家专注于HTML5网站建设，微信开发，API定制开发，以及新媒体运营的创新工作室。工作室成立于 2014年初，在网页设计和互联网应用开发领域有着独特理解。</p>
+					</div>
+					@*<div class="fh5co-footer-widget">
+						<ul class="fh5co-social">
+							<li><a href="#"><i class="icon-facebook"></i></a></li>
+							<li><a href="#"><i class="icon-twitter"></i></a></li>
+							<li><a href="#"><i class="icon-instagram"></i></a></li>
+							<li><a href="#"><i class="icon-linkedin"></i></a></li>
+							<li><a href="#"><i class="icon-youtube"></i></a></li>
+						</ul>
+					</div>*@
+				</div>
+
+				<div class="col-md-2 col-sm-6">
+					<div class="fh5co-footer-widget">
+						<h4 class="fh5co-footer-lead ">Company</h4>
+						<ul class="fh5co-list-check">
+							<li><a href="/Home/About">关于我们</a></li>
+							<li><a href="/Home/Contact">联系我们</a></li>
+							<li><a href="/Home/Works">精彩案例</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				<div class="visible-sm-block clearfix"></div>
+
+				<div class="col-md-2 col-sm-6">
+					<div class="fh5co-footer-widget">
+						<h4 class="fh5co-footer-lead">Services</h4>
+						<ul class="fh5co-list-check">
+							<li><a href="/Home/Detail/43">网站建设</a></li>
+							<li><a href="/Home/Detail/46">微信端应用开发</a></li>
+							<li><a href="/Home/Detail/44">新媒体营销服务</a></li>
+							<li><a href="/Home/Detail/45">API定制开发</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-6">
+					<div class="fh5co-footer-widget">
+						<h4 class="fh5co-footer-lead ">Products</h4>
+						<ul class="fh5co-list-check">
+							<li><a href="http://api.oplug.cn/Home/Paras/15" target="_blank">SendEmail API</a></li>
+							<li><a href="http://api.oplug.cn/Home/Paras/16" target="_blank">SendSMS API</a></li>
+							<li><a href="http://api.oplug.cn/Home/Paras/1" target="_blank">IsMobile API</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="row fh5co-row-padded fh5co-copyright">
+				<div class="col-md-8">
+					<p><small>&copy; GooStudio MY80旗下网站建设工作室. All Rights Reserved. <br>技术支持：<a href="http://www.my80.cn/" target="_blank" title="时优谷">时优谷</a> - 苏ICP备12039429号-1 | 24小时咨询热线：15961858835 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260946192'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/stat.php%3Fid%3D1260946192' type='text/javascript'%3E%3C/script%3E"));</script></small></p>
+				</div>
+			</div>
+		</div>
+
+	</footer>
+
+
+	<!-- jQuery -->
+	<script src="/Content/themes/IT/js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="/Content/themes/IT/js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="/Content/themes/IT/js/bootstrap.min.js"></script>
+	<!-- Owl carousel -->
+	<script src="/Content/themes/IT/js/owl.carousel.min.js"></script>
+	<!-- Waypoints -->
+	<script src="/Content/themes/IT/js/jquery.waypoints.min.js"></script>
+	<!-- Magnific Popup -->
+	<script src="/Content/themes/IT/js/jquery.magnific-popup.min.js"></script>	
+    
+    <script src="/Content/themes/IT/js/jquery.form.js"></script>
+    <script src="/Scripts/jquery.validate.min.js"></script>
+    <script src="/Content/themes/IT/js/jquery.validate.messages_zh.js"></script>
+    <script src="/Content/themes/IT/js/validate-methods.js"></script>
+    <script src="/Content/themes/IT/js/jquery.toast.min.js"></script>
+    <script src="/Content/themes/IT/js/contact.js"></script>
+
+    <!-- Main JS -->
+	<script src="/Content/themes/IT/js/main.js"></script>
+</body>
+</html>

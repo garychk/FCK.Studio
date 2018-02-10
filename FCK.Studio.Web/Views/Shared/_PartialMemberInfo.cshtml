@@ -1,0 +1,19 @@
+﻿@model FCK.Studio.Dto.MemberDto
+
+
+<div class="row">
+    <div class="col-md-4">
+        <a href="/Users/Index/@Model.Member_ID">
+            <img src="/Content/img/blank.gif" data-original="@Model.Member_Header" class="lazy img-responsive">
+        </a>
+    </div>
+    <div class="col-md-8"><h4 class="fck-mt5">@Model.Member_NickName</h4>
+    <p><a href="/Users/Index/@Model.Member_ID" class="glyphicon glyphicon-home" data-toggle="tooltip" data-placement="top" title="@(Model.Member_NickName)的主页"></a></p>
+    </div>
+</div>
+<hr style="margin:10px 0px" />
+<div>    
+    <p><i class="glyphicon glyphicon-envelope"></i>&nbsp;@Model.Member_Email</p>
+    <p><i class="glyphicon glyphicon-time"></i>&nbsp;@Model.Member_JoinTime</p>
+    <p><i class="glyphicon glyphicon-map-marker"></i>&nbsp;@Model.Member_Address</p>
+</div>

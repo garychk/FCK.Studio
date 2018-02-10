@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Oplug程序员学习资源共享平台";
+    ViewBag.Keywords = "开发者,免费资源,开发者,程序猿,编程,代码,开源,IT网站,Developer,技术文章";
+    ViewBag.Description = "Oplug致力于开创一个免费、共享、开放的互联网资源共享平台，为广大互联网开发者提供一个最好的技术交流社区";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+@*<div class="fck-banner">
+    <div class="container">
+        <h1>Innovation distinguishes between a leader and a follower.</h1>
+        <p>We're here to put a dent in the universe. Otherwise why else even be here?</p>
+    </div>
+</div>*@
+<div class="container fck-m-top">
+    
+    <div class="row">
+        <div class="col-md-9">
+            <div class="fck-w">
+                <div class="fck-title">
+                    <a href="/Article/" class="btn btn-info fck-rgt">查看更多</a>
+                    <span>最新博文</span>
+                </div>
+                @Html.Action("PartialArticles", "Article", new { page = 1, pageSize = 10, catename = "博文", ispage = 0 })
+            </div>
+            
+        </div>
+        <div class="col-md-3">
+		<div class="btn-group" role="group" aria-label="...">
+                <a href="/Members/Index" class="btn btn-success btn-lg">用户登录</a>
+                <a href="/Home/Regist" class="btn btn-info btn-lg">注册会员</a> 
+		</div>                
+	<div class="fck-w">
+	    <div class="fck-title-red"><span>博文版块</span></div>
+                @Html.Action("PartialCategory", "Article", new { catename = "博文", url = "/Article/" })
+	</div>
+            <div class="fck-w">
+                <div class="fck-title-red"><span>热门标签</span></div>
+                <div class="fck-tags">
+                    @Html.Action("PartialTags", "Article", new { catename = "博文", top = 30, url = "/Article/" })
+                </div>
+            </div>
+            <div class="fck-w">
+                <div class="fck-title"><span>最新评论</span></div>
+                @Html.Action("_PartialComments", "Article", new { pagesize = 10, style = "index" })
+            </div>
+            
+        </div>
+    </div>
+<div>
+        <div class="fck-title"><a href="/Resources/" class="btn btn-info fck-rgt">更多资源</a><span>最新资源</span></div>
+        @Html.Action("_PartialResources", "Resources", new { pageSize = 8, ispage = 0 })
+    </div>
+</div>

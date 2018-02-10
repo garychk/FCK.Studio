@@ -1,0 +1,38 @@
+﻿@model FCK.Studio.Members.Controllers.OrderDetailDto
+@{
+    ViewBag.Title = "订单详情";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+<h2 class="text-center text-danger">@Model.Order.Order_Amount</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6 col-xs-6">订单编号</div>
+    <div class="col-md-6 col-xs-6 text-right">@Model.Order.Order_Number</div>
+    <div class="col-md-6 col-xs-6">支付方式</div>
+    <div class="col-md-6 col-xs-6 text-right">@Model.Order.Order_Payway</div>    
+    <div class="col-md-6 col-xs-6">订单状态</div>
+    <div class="col-md-6 col-xs-6 text-right text-success">@(FCK.Config.cStatus(Model.Order.Order_Status))</div>
+    <div class="col-md-6 col-xs-6">会员姓名</div>
+    <div class="col-md-6 col-xs-6 text-right">@Model.Order.Member_Name</div>
+    <div class="col-md-6 col-xs-6">会员手机</div>
+    <div class="col-md-6 col-xs-6 text-right text-warning">@Model.Order.Member_Mobile</div>
+    <div class="col-md-6 col-xs-6">下单时间</div>
+    <div class="col-md-6 col-xs-6 text-right app-ccc">@Model.Order.Order_Time</div>
+    <div class="col-md-6 col-xs-6">订单备注</div>
+    <div class="col-md-6 col-xs-6 text-right app-ccc">@Model.Order.Order_Memo</div>
+</div>
+<hr />
+<h4>订单产品</h4>
+@{
+    foreach (var item in Model.OrderDetails)
+    {
+        <div class="row">
+            <div class="col-md-3 col-xs-3"><img src="@(FCK.Config.ImgServer)@(item.Product_Pic)" class="img-responsive" /></div>
+            <div class="col-md-9 col-xs-9">
+                <p>@item.Product_Name</p>
+                <p>单价：<i class="iconfont icon-money"></i>@item.Product_Price 数量：@item.Product_Number</p>
+            </div>
+        </div>
+    }
+}
+

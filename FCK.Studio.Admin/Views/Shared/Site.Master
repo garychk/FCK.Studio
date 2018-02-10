@@ -1,0 +1,37 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width" />
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+    </title>
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="/Content/js/jquery-2.1.1.min.js"></script>
+    <script src="/Content/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/Content/kindeditor/kindeditor-min.js"></script>
+    <script src="/Content/kindeditor/lang/zh_CN.js"></script>
+    <script src="/Content/js/jquery.datetimepicker.js"></script>
+    <script src="/Content/js/jquery.sticky.min.js"></script>
+    <script src="/Content/js/jquery-confirm.js"></script>
+    <script src="/Content/js/jquery.form.js"></script>  
+    <script src="/Content/js/bootstrap-treeview.js"></script>
+    <script src="/Content/js/Common.js"></script>
+    <link href="/Content/kindeditor/themes/default/default.css" rel="stylesheet" />
+    <link href="/Content/js/jquery-confirm.css" rel="stylesheet" />    
+    <link href="/Content/js/jquery.datetimepicker.css" rel="stylesheet" />    
+    <link href="/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="//at.alicdn.com/t/font_nbr0c2yzidv1v2t9.css" rel="stylesheet" />
+    <link href="/Content/Style.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    
+</body>
+</html>

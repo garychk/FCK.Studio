@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "享购——购物随心所欲、分享身边好东西";
+    Layout = "~/Views/Shared/_AppPage.cshtml";
+}
+@section scripts{
+    <script src="http://webapi.amap.com/maps?v=1.3&amp;key=59242506a0d68bda4544560fa0555190&callback=init"></script>
+    <script>
+        function init() {
+            var map = new AMap.Map('container', {
+                center: [120.305748, 31.574098],
+                zoom: 11
+            });
+            map.plugin(["AMap.ToolBar"], function () {
+                map.addControl(new AMap.ToolBar());
+            });
+
+            map.on('click', function (e) {
+                //经度  
+                console.log(e.lnglat.getLng());
+                //纬度
+                console.log(e.lnglat.getLat());
+            });
+        }
+        $(function () {
+            var winH = $(window).height();
+            $("#container").height(winH);
+
+            $("#app-search-result-bar").click(function () {
+                $("#app-search-result-content").toggle();
+            });
+
+            $("#Btn-Search").click(function () {
+                $("#search-result").removeClass("hidden");
+                $("#app-search-keywords").text($("#keywords").val());
+                $("#app-search-result-content").slideDown();
+            });
+        });
+    </script>
+}
+<div id="container" style="width:100%; height:800px"></div>
+<div id="search-result" class="navbar-fixed-bottom app-search-result hidden">
+    <div class="app-search-result-bar" id="app-search-result-bar"><i class="iconfont icon-search"></i>&nbsp;共找到“<span id="app-search-keywords"></span>”相关<span id="app-search-total">1</span>个结果</div>
+    <div class="app-search-result-content" id="app-search-result-content" style="display:none">
+        <div class="text-center"><img src="~/Content/img/loading.gif" height="10" /></div>
+    </div>
+</div>

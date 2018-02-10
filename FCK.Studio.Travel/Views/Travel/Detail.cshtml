@@ -1,0 +1,323 @@
+﻿@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="banner-bottom">
+    <!-- container -->
+    <div class="container">
+        <div class="faqs-top-grids">
+            <!--single-page-->
+            <div class="single-page">
+                <div class="col-md-8 single-gd-lt">
+                    <div class="single-pg-hdr">
+                        <h2>Morbi mollis mattis dolor</h2>
+                        <p>Eiusmod Tempor inc , St Dolore Place,Kingsport 56777</p>
+                        <p>Jump to: <a href="#">Over View</a>|<a href="#">Room Choices</a>|<a href="#">Hotel Information</a></p>
+                    </div>
+                    <div class="flexslider">
+                        <ul class="slides">
+                            <li data-thumb="/Content/images/p1.jpg">
+                                <img src="/Content/images/p1.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p2.jpg">
+                                <img src="/Content/images/p2.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p3.jpg">
+                                <img src="/Content/images/p3.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p4.jpg">
+                                <img src="/Content/images/p4.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p1.jpg">
+                                <img src="/Content/images/p1.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p2.jpg">
+                                <img src="/Content/images/p2.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p3.jpg">
+                                <img src="/Content/images/p3.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p4.jpg">
+                                <img src="/Content/images/p4.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p1.jpg">
+                                <img src="/Content/images/p1.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p2.jpg">
+                                <img src="/Content/images/p2.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p3.jpg">
+                                <img src="/Content/images/p3.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p4.jpg">
+                                <img src="/Content/images/p4.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p1.jpg">
+                                <img src="/Content/images/p1.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p2.jpg">
+                                <img src="/Content/images/p2.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p3.jpg">
+                                <img src="/Content/images/p3.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p4.jpg">
+                                <img src="/Content/images/p4.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p1.jpg">
+                                <img src="/Content/images/p1.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p2.jpg">
+                                <img src="/Content/images/p2.jpg" alt="" />
+                            </li>
+                            <li data-thumb="/Content/images/p3.jpg">
+                                <img src="/Content/images/p3.jpg" alt="" />
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- FlexSlider -->
+                    <script>
+                        // Can also be used with $(document).ready()
+                        $(window).load(function () {
+                            $('.flexslider').flexslider({
+                                animation: "slide",
+                                controlNav: "thumbnails"
+                            });
+                        });
+                    </script>
+
+                </div>
+                <div class="col-md-4 single-gd-rt">
+                    <div class="spl-btn">
+                        <div class="spl-btn-bor">
+                            <a href="#">
+                                <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+                            </a>
+                            <p>优惠价</p>
+                            <script>
+                                $(document).ready(function () {
+                                    $('[data-toggle="tooltip"]').tooltip();
+                                });
+                            </script>
+                        </div>
+                        <div class="sp-bor-btn text-right">
+                            <h4><span>$8,750</span> $4,850</h4>
+                            <p class="best-pri">最优价格</p>
+                            <a class="best-btn" href="booking.html">立即预订</a>
+                        </div>
+                    </div>
+                    <div class="map-gd">
+                        <div id="google-map" data-latitude="31.5883433" data-longitude="120.4370547" style="height: 300px"></div>
+                        <script src="http://ditu.google.cn/maps/api/js?key=AIzaSyA3qusKcTimexG1bHZlDOTwk2YdWS84n6o"></script>
+                        <script>
+                            //Google Map
+                            var latitude = $('#google-map').data('latitude')
+                            var longitude = $('#google-map').data('longitude')
+                            function initialize_map() {
+                                var myLatlng = new google.maps.LatLng(latitude, longitude);
+                                var mapOptions = {
+                                    zoom: 14,
+                                    scrollwheel: false,
+                                    center: myLatlng
+                                };
+                                var map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
+                                var contentString = '';
+                                var infowindow = new google.maps.InfoWindow({
+                                    content: '<div class="addre">' + $('.addre').html() + '</div>'
+                                });
+                                var marker = new google.maps.Marker({
+                                    position: myLatlng,
+                                    map: map
+                                });
+                                google.maps.event.addListener(marker, 'click', function () {
+                                    infowindow.open(map, marker);
+                                });
+                            }
+                            google.maps.event.addDomListener(window, 'load', initialize_map);
+                        </script>
+                    </div>
+                    <div class="other-comments">
+                        <div class="comments-head">
+                            <h3>评价</h3>
+                            <p>4.5/5</p>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="comments-bot">
+                            <p>"Vestibulum ullamcorper condimentum luctus. Ut ullamcorper elit eu auctor commodo."</p>
+                            <h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>John Doe</h4>
+                        </div>
+                        <div class="comments-bot">
+                            <p>"Aliquam non purus quis tellus varius egestas ut vitae tellus. Pellentesque non est ac tortor maximus imperdiet at id quam."</p>
+                            <h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Luther</h4>
+                        </div>
+                        <div class="comments-bot">
+                            <p>"Vestibulum sapien quam, interdum quis bibendum quis, malesuada a nisi. Proin at blandit justo."</p>
+                            <h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Patrick</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <!--//single-page-->
+        </div>
+        <div class="c-rooms">
+            <div class="p-table">
+                <div class="p-table-grids">
+                    <div class="col-md-3 p-table-grid">
+                        <div class="p-table-grad-heading">
+                            <h6>房型</h6>
+                        </div>
+                        <div class="p-table-grid-info">
+                            <a href="#">
+                                <img src="/Content/images/p2.jpg" alt=""></a>
+                            <div class="room-basic-info">
+                                <a href="#">Fusce vestibulum ultricies rutrum</a>
+                                <h6>1 king bed or  2 single beds</h6>
+                                <p>Vestibulum ullamcorper(condimentum luctus)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-table-grid">
+                        <div class="p-table-grad-heading">
+                            <h6>设施</h6>
+                        </div>
+                        <div class="rate-features">
+                            <ul>
+                                <li>Morbi mollis mattis</li>
+                                <li>Donec egestas</li>
+                                <li>Donec non risus</li>
+                                <li>Pellentesque sem</li>
+                                <li>Sed ut urna id metus</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-table-grid">
+                        <div class="p-table-grad-heading">
+                            <h6>平均价/晚</h6>
+                        </div>
+                        <div class="avg-rate">
+                            <h5>为您推荐</h5>
+                            <p>现价:</p>
+                            <span class="p-offer">$140</span>
+                            <span class="p-last-price">$230</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-table-grid">
+                        <div class="p-table-grad-heading">
+                            <h6>预订</h6>
+                        </div>
+                        <div class="book-button-column">
+                            <a href="#">预订</a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="p-table">
+                <div class="p-table-grids">
+                    <div class="col-md-3 p-table-grid">
+                        <div class="p-table-grad-heading">
+                            <h6>房型</h6>
+                        </div>
+                        <div class="p-table-grid-info">
+                            <a href="#">
+                                <img src="/Content/images/p1.jpg" alt=""></a>
+                            <div class="room-basic-info">
+                                <a href="#">Fusce vestibulum ultricies rutrum</a>
+                                <h6>1 king bed or  2 single beds</h6>
+                                <p>Vestibulum ullamcorper(condimentum luctus)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-table-grid">
+                        <div class="p-table-grad-heading">
+                            <h6>设施</h6>
+                        </div>
+                        <div class="rate-features">
+                            <ul>
+                                <li>Morbi mollis mattis</li>
+                                <li>Donec egestas</li>
+                                <li>Donec non risus</li>
+                                <li>Pellentesque sem</li>
+                                <li>Sed ut urna id metus</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-table-grid">
+                        <div class="p-table-grad-heading">
+                            <h6>平均价/晚</h6>
+                        </div>
+                        <div class="avg-rate">
+                            <h5>为您推荐</h5>
+                            <p>现价:</p>
+                            <span class="p-offer">$140</span>
+                            <span class="p-last-price">$230</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-table-grid">
+                        <div class="p-table-grad-heading">
+                            <h6>预订</h6>
+                        </div>
+                        <div class="book-button-column">
+                            <a href="#">预订</a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="p-table">
+                <div class="p-table-grids">
+                    <div class="col-md-3 p-table-grid">
+                        <div class="p-table-grad-heading">
+                            <h6>房型</h6>
+                        </div>
+                        <div class="p-table-grid-info">
+                            <a href="#">
+                                <img src="/Content/images/p2.jpg" alt=""></a>
+                            <div class="room-basic-info">
+                                <a href="#">Fusce vestibulum ultricies rutrum</a>
+                                <h6>1 king bed or  2 single beds</h6>
+                                <p>Vestibulum ullamcorper(condimentum luctus)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-table-grid">
+                        <div class="p-table-grad-heading">
+                            <h6>设施</h6>
+                        </div>
+                        <div class="rate-features">
+                            <ul>
+                                <li>Morbi mollis mattis</li>
+                                <li>Donec egestas</li>
+                                <li>Donec non risus</li>
+                                <li>Pellentesque sem</li>
+                                <li>Sed ut urna id metus</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-table-grid">
+                        <div class="p-table-grad-heading">
+                            <h6>平均价/晚</h6>
+                        </div>
+                        <div class="avg-rate">
+                            <h5>为您推荐</h5>
+                            <p>现价:</p>
+                            <span class="p-offer">$140</span>
+                            <span class="p-last-price">$230</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 p-table-grid">
+                        <div class="p-table-grad-heading">
+                            <h6>预订</h6>
+                        </div>
+                        <div class="book-button-column">
+                            <a href="#">预订</a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //container -->
+</div>

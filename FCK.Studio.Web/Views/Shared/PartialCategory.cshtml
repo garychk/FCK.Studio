@@ -1,0 +1,9 @@
+﻿@model FCK.Studio.Dto.CategoryList
+
+<ul class="list-unstyled">
+    @foreach (var item in Model.datas){
+    <li>
+        <i class="icon iconfont" style="font-size:28px">&#xe608;</i>
+        <a href="@(ViewData["listurl"])?cid=@(item.Category_ID)">@item.Category_Name</a></li>
+    }
+</ul>

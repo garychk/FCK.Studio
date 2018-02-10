@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+<div class="container-fluid">
+    <div class="panel panel-default app-usertop">
+        <div class="panel-body">
+            <div class="text-center">
+                <span class="iconfont icon-member app-userlogo"></span>
+                <p>方策，您好！<a href="#" class="iconfont icon-edit"></a></p>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4 col-xs-4 text-center">
+                    <h3 class="text-danger"><i class="iconfont icon-money"></i>&nbsp;380</h3>
+                    <p>今日收入</p>
+                </div>
+                <div class="col-md-4 col-xs-4 text-center">
+                    <h3 class="text-success"><i class="iconfont icon-users"></i>&nbsp;28</h3>
+                    <p>今日访客</p>
+</div>
+                <div class="col-md-4 col-xs-4 text-center">
+                    <h3 class="text-warning"><i class="iconfont icon-money"></i>&nbsp;68</h3>
+                    <p>客单价</p>
+</div>
+            </div>
+        </div>
+    </div>
+    <div class="list-group">
+        <a href="/Register/Message" class="list-group-item">
+            <i class="iconfont icon-announce"></i>&nbsp;消息中心<span class="badge app-bgred">4</span>
+        </a>
+        <a href="/Register/Products" class="list-group-item">
+            <i class="iconfont icon-product"></i>&nbsp;商品信息
+        </a>
+        <a href="/Register/Orders" class="list-group-item">
+            <i class="iconfont icon-orders"></i>&nbsp;订单管理<span class="badge app-bgreen">2</span>
+        </a>
+        <a href="/Register/Finance" class="list-group-item">
+            <i class="iconfont icon-finance"></i>&nbsp;财务报表
+        </a>
+        <a href="/Register/Setting" class="list-group-item">
+            <i class="iconfont icon-render"></i>&nbsp;基本信息设置
+        </a>
+        <a href="/" class="list-group-item">
+            <i class="iconfont icon-exist"></i>&nbsp;注销
+        </a>
+    </div>
+</div>
+

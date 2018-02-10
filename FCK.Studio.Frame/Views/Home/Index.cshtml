@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "云助手";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="/Content/Control/home.js"></script>
+<div class="app-login-panel">
+    <p class="text-center app-login-title">
+        <span>Cloud</span>
+        <i>CRM</i>
+        <i class="glyphicon glyphicon-cloud"></i>
+    </p>
+    <form role="form" name="SubmitForm" id="SubmitForm">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon" id="UserName"><i class="glyphicon glyphicon-user"></i></span>
+                <input type="text" class="form-control" id="UserName" name="UserName" placeholder="UserName" aria-describedby="UserName">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon" id="Password"><i class="glyphicon glyphicon-lock"></i></span>
+                <input type="password" class="form-control" id="Password" name="Password" placeholder="Password" aria-describedby="Password">
+            </div>
+        </div>
+        <button type="button" id="ButtonLogin" data-loading-text="Loading..." class="btn btn-success btn-lg btn-block" autocomplete="off">登录</button>
+    </form>
+</div>

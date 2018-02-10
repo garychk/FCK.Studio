@@ -1,0 +1,139 @@
+﻿@model FCK.Studio.Dto.RegisterDto
+@{
+    ViewBag.Title = "店铺设置";
+    Layout = "~/Views/Shared/_AppPage.cshtml";
+}
+@section scripts{
+    <script>
+        $(function () {
+            $("#Btn_Submit").click(function () {
+
+                if ($("#Register_Name").val() == "") {
+                    alertE("请输入租户名！"); return false;
+                }
+                var _mobile = $("#Register_Mobile").val();
+                var _email = $("#Register_Email").val();
+
+                if (!checkMobile(_mobile)) {
+                    alertE("手机号码格式不正确！"); return false;
+                }
+                if (!checkEmail(_email)) {
+                    alertE("电子邮箱格式不正确！"); return false;
+                }
+                var $btn = $(this).button('loading');
+                var options = {
+                    url: '/Register/CreateOrUpdate',
+                    type: 'post',
+                    success: function (result) {
+                        if (result.code == 100) {
+                            alertE("保存成功！");
+                        }
+                        else
+                            alertE(result.message);
+                        $btn.button('reset');
+                    }
+                };
+                $("#SubmitForm").ajaxSubmit(options);
+                return false;
+            });
+        });
+    </script>
+}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-horizontal app-form" name="SubmitForm" id="SubmitForm">
+            <div class="form-group">
+                <label for="Member_Mobile" class="col-sm-2 control-label">商户名称</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="商户名称" id="Register_Name" name="Register_Name" value="@Model.Register_Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Weixin" class="col-sm-2 control-label">联系人</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="联系人" id="Register_Contactor" name="Register_Contactor" value="@Model.Register_Contactor">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Mobile" class="col-sm-2 control-label">手机</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="手机" id="Register_Mobile" name="Register_Mobile" value="@Model.Register_Mobile">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Mobile" class="col-sm-2 control-label">联系电话</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="联系电话" id="Register_Telphone" name="Register_Telphone" value="@Model.Register_Telphone">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Member_Mobile" class="col-sm-2 control-label">电子邮箱</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" placeholder="电子邮箱" id="Register_Email" name="Register_Email" value="@Model.Register_Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Mobile" class="col-sm-2 control-label">身份证号码</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="Register_IDNumber" readonly="readonly" value="@Model.Register_IDNumber">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Member_NickName" class="col-sm-2 control-label">营业执照</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly="readonly" name="Register_BusinessLicense" value="@Model.Register_BusinessLicense">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Mobile" class="col-sm-2 control-label">组织机构代码证</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" readonly="readonly" name="Register_OrgCodeCert" value="@Model.Register_OrgCodeCert">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Mobile" class="col-sm-2 control-label">联系地址</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" placeholder="省份" id="Register_Province" name="Register_Province" value="@Model.Register_Province">
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" placeholder="区域" id="Register_Zone" name="Register_Zone" value="@Model.Register_Zone">
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" placeholder="城市" id="Register_City" name="Register_City" value="@Model.Register_City">
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" placeholder="联系地址" id="Register_Address" name="Register_Address" value="@Model.Register_Address">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Mobile" class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="备注" id="Register_Memo" name="Register_Memo" value="@Model.Register_Memo">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Member_Mobile" class="col-sm-2 control-label">到期时间</label>
+                <div class="col-sm-10">
+                    <span class="text-danger">@Model.Register_DeadLine</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <input type="hidden" id="Register_Grade" name="Register_Grade" value="@Model.Register_Grade">
+                    <input type="hidden" id="Register_ID" name="Register_ID" value="@Model.Register_ID">
+                    <input type="hidden" id="Register_AddTime" name="Register_AddTime" value="@Model.Register_AddTime">
+                    <input type="hidden" id="Register_ApiPower" name="Register_ApiPower" value="@Model.Register_ApiPower">
+                    <input type="hidden" id="Register_Number" name="Register_Number" value="@Model.Register_Number">
+                    <input type="hidden" id="Register_Status" name="Register_Status" value="@Model.Register_Status">
+                    <input type="hidden" id="Register_Type" name="Register_Type" value="@Model.Register_Type">
+                    <input type="hidden" id="Register_DeadLine" name="Register_DeadLine" value="@Model.Register_DeadLine">
+                    <button type="submit" class="btn btn-lg btn-success btn-block" id="Btn_Submit">确定</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+

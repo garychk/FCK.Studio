@@ -1,0 +1,20 @@
+﻿@model List<FCK.Studio.Dto.CategoryDto>
+<h1>Focused search,Wide income</h1>
+<p class="color9">那种将业务逻辑交由业务界面处理的快速UI方式是旁门左道</p>
+<div style="width: 660px; height:100px; margin: 0px auto">
+    <form id="FormSearch" name="FormSearch">
+        <select class="form-control input-lg fck-left" style="width: 160px;border-right:none" name="cateid" id="cateid">
+            <option value="0">全部分类</option>
+            @foreach (var item in Model)
+            {
+                <option value="@item.Category_ID">@item.Category_Name</option>
+            }
+        </select>
+        <input type="text" class="form-control input-lg fck-left" placeholder="输入关键词搜索资源" style="width: 400px" name="keywords">
+        <input type="hidden" name="page" id="page" value="1">
+        <input type="hidden" name="pageSize" id="pageSize" value="12" />
+        <input type="hidden" id="action" value="/Resources/_PartialResources" />
+        <input type="hidden" id="renderid" value="ResourcesList" />
+        <button type="button" class="btn btn-danger btn-lg fck-left" onclick="GoSearch()">搜索</button>
+    </form>
+</div>

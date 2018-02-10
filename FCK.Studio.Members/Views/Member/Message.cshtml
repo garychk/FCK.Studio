@@ -1,0 +1,24 @@
+﻿@model FCK.Studio.Dto.LogJson
+@{
+    ViewBag.Title = "我的消息";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+<div class="list-group">
+    @{
+        if (Model.total > 0)
+        {
+            foreach (var item in Model.datas)
+            {
+                <a href="#" class="list-group-item">
+                    @(item.Log_Content)
+                    <p><i class="iconfont icon-time"></i>&nbsp;@(item.Log_Time.ToString())</p>
+                </a>
+            }
+        }
+        else
+        {
+            <a href="#" class="list-group-item">暂无消息</a>
+        }
+    }
+
+</div>

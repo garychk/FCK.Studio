@@ -1,0 +1,57 @@
+﻿@model List<FCK.Studio.Dto.APIDTO>
+@{
+    ViewBag.Title = "FCK.Studio API Document" + Model.Count;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(function () {
+        $('#accordion').collapse({
+            toggle: false
+        });
+
+    });
+</script>
+
+<div class="container-fluid">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        @{int idx = 1;}
+        @foreach (var item in Model)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading@(idx)">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse@(idx)" aria-expanded="false" aria-controls="collapse@(idx)">@item.CateName</a>
+                    </h4>
+                </div>
+                <div id="collapse@(idx)" class="panel-collapse collapse @(idx==1?"in":"")" role="tabpanel" aria-labelledby="heading@(idx)">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <td>接口</td>
+                                <td></td>
+                                <td>方法</td>
+                                <td>调用地址</td>
+                                <td>说明</td>
+                                <td>参数说明</td>
+                            </tr>
+                            @foreach (var api in item.APIS)
+                            {
+                                <tr>
+                                    <td><a href="/Home/Paras/@api.ID">@api.API</a></td>
+                                    <td>@api.Title</td>                                    
+                                    <td>@api.Methord</td>
+                                    <td>@api.URL</td>
+                                    <td>@api.Memo</td>
+                                    <td><a href="/Home/Paras/@api.ID">查看</a></td>
+                                </tr>
+                            }
+                        </table>
+                        @{idx++;}
+                    </div>
+                </div>
+            </div>
+            
+        }
+
+    </div>
+</div>

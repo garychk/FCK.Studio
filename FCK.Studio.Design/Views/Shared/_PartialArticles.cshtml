@@ -1,0 +1,31 @@
+﻿@model FCK.Studio.Core.PageDatas<FCK.Studio.Core.ArticleDto>
+
+<div class="row">
+    @foreach (var item in Model.datas)
+    {
+        <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-mb30">
+            <div class="fh5co-product">
+                <a href="@(FCK.Common.Utility.ImgServer)@(item.Article_Pic)" class="image-popup">
+                <img src="@(FCK.Common.Utility.ImgServer)@(item.Article_PicSmall)" alt="@(item.Article_Title)" class="img-responsive img-rounded to-animate">
+                </a>
+                <h4>@(item.Article_Title)</h4>
+                <p>@(item.Article_Brief)</p>
+                <p><a href="/Home/@(ViewData["catename"]=="案例"?"WMore":"Detail")/@(item.Article_ID)">Read more</a></p>
+            </div>
+        </div>
+    }
+    <div class="visible-sm-block visible-xs-block clearfix"></div>
+</div>
+@if (Model.pages > 1)
+{
+    <nav>
+        <ul class="pagination">
+            <li><a href="?page=1">&laquo;</a></li>
+            @for (int i = 0; i < Model.pages; i++)
+            {
+                <li><a href="?page=@(i + 1)">@(i + 1)</a></li>
+            }
+            <li><a href="?page=@Model.pages">&raquo;</a></li>
+        </ul>
+    </nav>
+}

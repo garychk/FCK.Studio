@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "云助手";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+<script src="/Content/Highcharts/highcharts.js"></script>
+<script src="/Content/Highcharts/exporting.js"></script>
+<script src="/Content/app.js"></script>
+<div class="panel panel-default">
+    <div class="panel-body homeicon">
+        <div class="row">
+            <div class="col-xs-3 col-md-3">
+                <a href="/Home/Calendar" class="iconfont icon-rili"></a>
+                <p>日程管理</p>
+            </div>
+            <div class="col-xs-3 col-md-3">
+                <a href="/Home/Customer" class="iconfont icon-kehu"></a>
+                <p>客户管理</p>
+            </div>
+            <div class="col-xs-3 col-md-3">
+                <a href="/Home/Contract" class="iconfont icon-contract"></a>
+                <p>合同管理</p>
+            </div>            
+            <div class="col-xs-3 col-md-3">
+                <a href="/Home/MemberCenter" class="iconfont icon-huiyuan"></a>
+                <p>我</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        <div class="panel panel-default" id="BarBasic"></div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <div class="panel panel-default" id="AreaBasic"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        <div class="panel panel-default" id="">
+            <div class="list-group">
+                <a href="#" class="list-group-item active">待办事项</a>
+                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+                <a href="#" class="list-group-item">Morbi leo risus</a>
+                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                <a href="#" class="list-group-item">Vestibulum at eros</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <div class="panel panel-primary" id="">
+            <div class="panel-heading">最新客户</div>
+            <table class="table table-striped">
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+

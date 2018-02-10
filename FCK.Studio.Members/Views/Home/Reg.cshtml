@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "享购会员注册";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+@section scripts{
+    <script>
+        $(function () {
+            $("#FormSubmit").validate({
+                rules: {
+                    Member_UserName: {
+                        required: true,
+                        minlength: 4
+                    },
+                    Member_Password: {
+                        required: true,
+                        minlength: 5
+                    },
+                    Confirm_Password: {
+                        required: true,
+                        minlength: 5,
+                        equalTo: "#Member_Password"
+                    },
+                    Member_Email: {
+                        required: true
+                    },
+                    Member_Mobile: {
+                        required: true,
+                        isMobile: true
+                    }
+                },
+                messages: {
+                    Member_UserName: {
+                        required: "请输入用户名"
+                    },
+                    Member_Password: {
+                        required: "密码不能空"
+                    },
+                    Confirm_Password: {
+                        required: "请输入密码",
+                        minlength: "密码长度不能小于 5 个字符",
+                        equalTo: "两次密码输入不一致"
+                    },
+                    Member_Email: {
+                        required: "邮箱不能空"
+                    },
+                    Member_Mobile: {
+                        required: "手机号不能空"
+                    },
+                    iAgreeLaw: {
+                        required: "请勾选"
+                    }
+                },
+                submitHandler: function (form) {
+                    var $btn = $("#btn-submit").button('loading');
+                    var options = {
+                        url: '/Home/DoReg',
+                        type: 'POST',
+                        success: function (response) {
+                            if (response.code == 100) {
+                                confirmE('注册成功，立即登录?', function () {
+                                    window.location.href = "/Home/Login";
+                                });
+                            }
+                            else
+                                alertE(response.message);
+                            $btn.button('reset');
+                        }
+                    };
+                    $(form).ajaxSubmit(options);
+                }
+            });
+        });
+    </script>
+}
+<div class="container">
+    <h1 class="text-center"><i class="iconfont icon-user app-longinlogo"></i></h1>
+    <h3 class="text-center">用户注册</h3>
+    <form id="FormSubmit" name="FormSubmit">
+        <div class="form-group">
+            <input type="text" class="form-control" id="Member_UserName" name="Member_UserName" placeholder="请输入用户名">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" id="Member_Password" name="Member_Password" placeholder="请输入密码">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" id="Confirm_Password" placeholder="确认密码">
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" id="Member_Email" name="Member_Email" placeholder="请输入有效邮箱">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="Member_Mobile" name="Member_Mobile" placeholder="请输入手机号码">
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="iAgreeLaw" name="iAgreeLaw" required />
+            我已阅读并同意<a href="#">《享购会员使用条款》</a>
+
+        </div>
+        <button type="submit" class="btn btn-danger btn-lg btn-block" id="btn-submit">立即注册</button>
+        <a href="/Home/Login" class="btn btn-success btn-lg btn-block">我有账户，立即登录</a>
+        <a href="/" class="btn btn-default btn-lg btn-block">返回首页</a>
+    </form>
+</div>

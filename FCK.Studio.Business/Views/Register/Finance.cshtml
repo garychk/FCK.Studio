@@ -1,0 +1,178 @@
+﻿@model FCK.Studio.Dto.FinanceJson
+@{
+    ViewBag.Title = "店铺经营报表";
+    Layout = "~/Views/Shared/_AppPage.cshtml";
+}
+@section scripts{
+    <script src="/Content/Highcharts/highcharts.js"></script>
+    <script src="/Content/Highcharts/exporting.js"></script>
+    <script>
+        $(function () {
+            
+            $.post('/Register/GetHighchartDatas', function (datas) {
+                $('#container').highcharts({
+                    exporting: {
+                        enabled: false
+                    },
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false
+                    },
+                    title: {
+                        text: '4月份各品类销售占比'
+                    },
+                    tooltip: {
+                        headerFormat: '{series.name}<br>',
+                        pointFormat: '{point.name}: ￥{point.amount}占<b>{point.percentage:.1f}%</b><br>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: false
+                            },
+                            showInLegend: true
+                        }
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: '销售占比',
+                        data: datas
+                    }]
+                });
+            });
+        });
+        function GetFinanceChartData() {
+            var FinanceDataArr = new Array();
+            var timeDataArr = new Array();
+
+            function FinanceData(name, data) {
+                this.name = name;
+                this.data = data;
+            }
+            var _stime = $("#stime").val();
+            var _etime = $("#etime").val();
+            $.ajax({
+                type: "POST",
+                url: "/Register/GetFinanceChartData",
+                data: {
+                    stime: _stime,
+                    etime: _etime
+                },
+                success: function (result) {
+                    for (var i = 0; i < result.length; i++) {
+                        var obj = new FinanceData(result[i].name, result[i].data);
+                        FinanceDataArr.push(obj);
+                    }
+                    timeDataArr = result[0].datetime;
+                    CreateChart(timeDataArr, FinanceDataArr);
+                }
+            });
+        }
+        function CreateChart(xData, seriesData) {
+            $('#container2').highcharts({
+                chart: {
+                    type: 'spline'
+                },
+                exporting: {
+                    enabled: false
+                },
+                title: {
+                    text: '月度营业状况'
+                },
+                subtitle: {
+                    text: 'Monthly sales status'
+                },
+                xAxis: {
+                    categories: xData
+                },
+                yAxis: {
+                    title: {
+                        text: '营业额(￥)'
+                    },
+                    labels: {
+                        formatter: function () {
+                            return this.value
+                        }
+                    }
+                },
+                tooltip: {
+                    crosshairs: true,
+                    shared: true
+                },
+                plotOptions: {
+                    spline: {
+                        marker: {
+                            radius: 4,
+                            lineColor: '#666666',
+                            lineWidth: 1
+                        }
+                    }
+                },
+                series: seriesData
+            });
+        }
+    </script>
+}
+
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">经营报表</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">经营明细</a></li>
+</ul>
+
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+        <div class="panel panel-default" style="border-radius:0px;border-top:none">
+            <div class="panel-body" id="container"></div>
+            <div class="panel-body" id="container2"></div>
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="profile">
+        <div class="list-group  app-list-group">
+            @{
+                if (Model.total > 0)
+                {
+                    foreach (var item in Model.datas)
+                    {
+                        <a href="#" class="list-group-item app-list-item">
+
+                            <p>
+                                <i class="iconfont icon-time"></i>&nbsp;<span class="app-ccc">@item.Finance_Time</span>&nbsp;
+
+                                @{
+                                    if (item.Finance_Type.ToLower() == "payout")
+                                    {
+                                        <span>支出</span><span class="text-danger">-@item.Finance_Amount</span>
+                                    }
+                                    else if (item.Finance_Type.ToLower() == "comein")
+                                    {
+                                        <span>收入</span><span class="text-success">+@item.Finance_Amount</span>
+                                    }
+                                    else if (item.Finance_Type.ToLower() == "cash")
+                                    {
+                                        <span>提现</span><span class="text-danger">-@item.Finance_Amount</span>
+                                    }
+                                    else
+                                    {
+                                        <span>退款</span><span class="text-success">-@item.Finance_Amount</span>
+                                    }
+                                }
+                                <span class="app-ccc">@item.Finance_Memo</span>
+                            </p>
+                        </a>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <a href="#" class="list-group-item">暂无信息</a>
+                                    }
+            }
+
+        </div>
+    </div>
+</div>
+
+
+

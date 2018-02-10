@@ -1,0 +1,100 @@
+﻿@model FCK.Studio.Dto.FCKAPIDto
+@{
+    ViewBag.Title = "Paras";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+<script>
+        $(function () {
+            LoadDatas();
+        });
+        var paras = null;
+        function LoadDatas() {
+            var _keywords = $("#keywords").val();
+            var _apid = $("#apid").val();
+            var _page = parseInt($("#currentpage").val());
+            $("#DataList").html('<center><img src="/Content/images/loading.gif" /></center>');
+            $.ajax({
+                type: "POST",
+                url: "/FckAPI/GetParas",
+                data: {
+                    page: _page,
+                    pageSize: 10,
+                    keywords: _keywords,
+                    apid: _apid
+                },
+                success: function (result) {
+                    var items = result.datas;
+                    var pages = result.pages;
+                    var total = result.total;
+                    paras = items;
+                    var htmls = '';
+                    htmls += '<tr>';
+                    htmls += '<td><input type="checkbox" id="SelAll"> 全选</td>';
+                    htmls += '<td>参数名</td>';
+                    htmls += '<td>说明</td>';
+                    htmls += '<td>参数类型</td>';
+                    htmls += '<td>长度</td>';
+                    htmls += '<td>必填</td>';
+                    htmls += '<td>操作</td>';
+                    htmls += '</tr>';
+                    for (var i = 0; i < items.length; i++) {
+                        htmls += '<tr>';
+                        htmls += '<td><input type="checkbox" name="para" value="' + items[i].ID + '"></td>';
+                        htmls += '<td>' + items[i].Para_Name + '</td>';
+                        htmls += '<td>' + items[i].Para_Intro + '</td>';
+                        htmls += '<td>' + items[i].Para_Type + '</td>';
+                        htmls += '<td>' + items[i].Para_Length + '</td>';
+                        htmls += '<td>' + (items[i].Para_Required == 1 ? "是" : "否") + '</td>';
+                        htmls += '<td>';
+                        htmls += '<button type="button" class="btn btn-danger" onclick="Del(' + items[i].ID + ')">删除</button>';
+                        htmls += '<a href="javascript:OpenEdit(' + items[i].ID + ',' + items[i].API_ID + ')" class="btn btn-info">编辑</a>';
+                        htmls += '</td>';
+                        htmls += '</tr>';
+                    }
+                    $("#DataList").html(htmls);
+                    $("#pagination").html(Pagination(_page, pages, total));
+                }
+            });
+            return false;
+        }
+
+        function OpenEdit(id, apid) {
+            OpenWin('参数编辑', '/FckAPI/ParasEdit/' + id + '?apid=' + apid, '');
+            return false;
+        }
+</script>
+<ol class="breadcrumb">
+    <li><a href="/Home/Main"><i class="iconfont icon-home"></i>控制台</a></li>
+    <li><a href="/FckAPI/">API管理</a></li>
+    <li class="active">参数管理@(Model.API)</li>
+</ol>
+<div class="panel panel-default">
+    <div class="container">
+        <h3><i class="iconfont icon-api"></i>参数管理 <small>@(Model.API)</small></h3>
+        <hr>
+        <ul class="list-inline">
+            <li>
+                <div class="btn-group" role="group" aria-label="...">
+                    <a class="btn btn-info" href="javascript:OpenEdit(0,@Model.ID)">添加</a>
+                    <button type="button" class="btn btn-danger" onclick="DelPacth()">删除</button>
+                </div>
+            </li>
+            <li>
+                <form class="form-inline" role="form">
+                    <input type="hidden" id="currentpage" value="1" />
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="快速搜索" id="keywords">
+                        <input type="hidden" id="apid" value="@Model.ID" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" onclick="GoSearch()">GO</button>
+                        </span>
+                    </div>
+                </form>
+            </li>
+        </ul>
+        <table class="table table-hover" id="DataList"></table>
+        <nav class="rgt">
+            <ul class="pagination" id="pagination"></ul>
+        </nav>
+    </div>
+</div>

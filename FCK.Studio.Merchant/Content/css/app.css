@@ -1,0 +1,51 @@
+﻿body {
+    background-color: #f9f9f9;
+}
+
+.app-longinlogo {
+    font-size: 60px;
+}
+.app-main{
+    margin-top:70px;
+}
+.app-usertop {
+    border: none;
+    box-shadow: none;
+    background-color: #0094ff;
+    color:#fff;
+}
+.app-usertop a:link{
+    color:#fff;
+    text-decoration:none;
+}
+.app-usertop a:hover{
+    color:#ffd800;
+    text-decoration:none;
+}
+.app-usertop a:visited{
+    color:#fff;
+    text-decoration:none;
+}
+.app-usertop a:active{
+    color:#fff;
+    text-decoration:none;
+}
+
+.app-userlogo {
+    font-size: 60px;
+}
+
+.app-bgred {
+    background-color: #ff0000;
+}
+
+.app-bgreen {
+    background-color: #00ff21;
+}
+
+.app-form input{
+    border:0px;
+    border-bottom:1px solid #ccc;
+    box-shadow:none;
+    border-radius:0px;
+}

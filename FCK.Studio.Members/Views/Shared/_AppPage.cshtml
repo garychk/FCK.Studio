@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>@ViewBag.Title</title>
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="//at.alicdn.com/t/font_54joye29405uq5mi.css" rel="stylesheet" />
+    <link href="/Content/js/jquery-confirm.css" rel="stylesheet" />
+    <link href="/Content/css/app.css" rel="stylesheet" />
+    <script src="/Content/js/jquery.min.js"></script>
+    <script src="/Content/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/Content/js/jquery-confirm.js"></script>
+    <script src="/Content/js/jquery.form.js"></script>
+    <script src="/Content/js/jquery.lazyload.js"></script>
+    <script src="/Content/js/app.js"></script>
+    @RenderSection("scripts", required: false)
+    
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top app-nav-trans" role="navigation">
+        <div class="container-fluid">
+            <div class="app-search">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <a class="iconfont icon-member" href="/Member/"></a>
+                    </span>
+                    <form id="FormSearch" name="FormSearch">
+                        <input type="text" class="form-control" placeholder="搜一搜，好东西就在你身边" id="keywords" name="keywords">
+                        <input type="hidden" name="page" value="1" />
+                        <input type="hidden" name="pageSize" value="0" />
+                        <input type="hidden" id="action" value="/Products/_PartialProducts" />
+                        <input type="hidden" id="renderid" value="app-search-result-content" />
+                    </form>
+                    <span class="input-group-addon" id="Btn-Search" onclick="GoSearch()"><i class="iconfont icon-search"></i></span>
+                </div>
+            </div>
+        </div>
+
+    </nav>
+    @RenderBody()
+</body>
+</html>

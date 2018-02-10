@@ -1,0 +1,34 @@
+﻿@model FCK.Studio.Members.Models.PayResultDto
+@{
+    ViewBag.Title = "PayResult";
+    Layout = "~/Views/Shared/_AppLayout.cshtml";
+}
+<h3 class="text-center">支付结果</h3>
+<p>订单编号：@Model.Orders.Order_Number</p>
+<p>订单总金额：<i class="iconfont icon-money"></i><span class="text-danger">@Model.Orders.Order_Amount</span></p>
+<p>
+    订单状态：@FCK.Config.cStatus(Model.Orders.Order_Status)
+</p>
+<h4>订单详情</h4>
+<table class="table table-condensed">
+    <tr>
+        <th></th>
+        <th>商品</th>
+        <th>单价</th>
+        <th style="width:40px">数量</th>
+    </tr>
+    @{
+        foreach (var item in Model.OrdersDetails)
+        {
+            <tr>
+                <td><img src="@(FCK.Config.ImgServer)@item.Product_Pic" class="img-responsive" width="100"></td>
+                <td>@item.Product_Name</td>
+                <td class="text-danger"><i class="iconfont icon-money"></i>@item.Product_Price</td>
+                <td>@item.Product_Number</td>
+            </tr>
+        }
+    }
+</table>
+<p class="text-center">
+    <a href="/Member/Orders" class="btn btn-info">查看我的订单</a>
+</p>

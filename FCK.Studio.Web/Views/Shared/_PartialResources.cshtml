@@ -1,0 +1,65 @@
+﻿@using FCK.Studio.Dto
+@model PageDatas<ArticleDto>
+@using FCK.Common;
+<div class="row">
+    @if (Model.total > 0)
+    {
+        foreach (var item in Model.datas)
+        {
+            <div class="fck-source-list">
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+
+                        <div class="panel-body">
+                            <div class="sHoverItem" onclick="window.location.href = '/Resources/Detail/@item.Article_ID'">
+                                <img src="/Content/img/blank.gif" data-original="@(Utility.ImgServer)@(item.Article_PicSmall)" class="lazy">
+                                <div class="sIntro"></div>
+                            </div>
+                            <div class="c">
+                                <p class="t"><a href="/Resources/Detail/@item.Article_ID">@item.Article_Title</a></p>
+                                <p class="color9 m">@item.Article_Brief</p>
+                                <p><span class="glyphicon glyphicon-th-large"></span>@item.Article_Tag</p>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="pull-left">
+                                <small class="color9">
+                                    <span class="glyphicon glyphicon-eye-open"></span>@item.Article_Hits
+                                    <span class="glyphicon glyphicon-heart"></span>@item.Article_Collections
+                                </small>
+                            </div>
+                            <div class="pull-right">
+                                <a href="/Users/Index/@item.Article_MemberID" class="glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="@item.Article_Author"></a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-center"><span class="glyphicon glyphicon-info-sign colorf60"></span>&nbsp;没有找到相关资源！</p>
+    }
+</div>
+
+<nav class="text-center @(Model.pages>1?"":"hide")">
+    <ul class="pagination" id="pagination">
+        @if (Model.pages > 1)
+        {
+            <li>
+                <a href="1" aria-label="Previous">&laquo;</a>
+            </li>
+            for (int i = 0; i < Model.pages; i++)
+            {
+                <li><a href="@(i + 1)">@(i + 1)</a></li>
+            }
+            <li>
+                <a href="@Model.pages" aria-label="Next">&raquo;</a>
+            </li>
+
+        }
+    </ul>
+</nav>
