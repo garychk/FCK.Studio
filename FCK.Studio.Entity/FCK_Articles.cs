@@ -83,10 +83,15 @@ namespace FCK.Studio.Entity
         /// 更新时间
         /// </summary>
         public DateTime Article_UpdateTime { set; get; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTime Article_CreateTime { set; get; }
 
         public FCK_Articles()
         {
             Article_UpdateTime = DateTime.Now;
+            Article_CreateTime = DateTime.Now;
         }
         
     }
